@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fuel Log</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_list_and_settings">ListAndSettings</string>
+</resources>
