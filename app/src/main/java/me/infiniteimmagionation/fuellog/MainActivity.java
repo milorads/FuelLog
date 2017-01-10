@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         if(sharedpreferences.contains("YesNo"))
         {

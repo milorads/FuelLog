@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         {
             int iMileage = 0;
             int iFuel = 0;
-            try 
+            try
             {
                 iMileage = Integer.parseInt(mileage.getText().toString());
                 iFuel = Integer.parseInt(fuelleft.getText().toString());
@@ -131,6 +131,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         {
             sharedpreferences.edit().putBoolean("YesNo",true).apply();
         }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
     private void saveMileageFuel(int mileage, int fuel)
     {
