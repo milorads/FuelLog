@@ -1,6 +1,9 @@
 package me.infiniteimmagionation.fuellog;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +12,25 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences sharedpreferences;
+    public static final String mypreference = "FirstRun";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+        if(sharedpreferences.contains("YesNo"))
+        {
+            if (sharedpreferences.getBoolean("YesNo")==true){}
+        }
+        else
+        {
+
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

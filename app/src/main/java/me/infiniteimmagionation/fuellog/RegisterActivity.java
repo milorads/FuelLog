@@ -8,6 +8,8 @@ import android.widget.Button;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String PREFS_NAME = "MyPrefsFile";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
