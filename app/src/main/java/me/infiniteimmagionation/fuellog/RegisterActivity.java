@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
         Button saveDugme = (Button)findViewById(R.id.saveButton);
         saveDugme.setOnClickListener(this);
     }
@@ -38,6 +38,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             {
                 iMileage = Integer.parseInt(mileage.getText().toString());
                 iFuel = Integer.parseInt(fuelleft.getText().toString());
+                if (iMileage<=0 && iFuel<=0)
+                {
+                    dialogBuilder("Mileage and fuel are both set to zero. Are you sure?");
+                }
+                else if(iMileage<=0)
+                {
+                    dialogBuilder("Mileage set to zero. Are you sure?");
+                }
+                else if(iFuel<=0)
+                {
+                    dialogBuilder("Fuel set to zero. Are you sure?");
+                }
+                else
+                {
+                    saveMileageFuel(iMileage, iFuel);
+                    savePreference();
+                }
+//                saveMileageFuel(iMileage, iFuel);
+//                savePreference();
             }
             catch (Exception e)
             {
@@ -52,23 +71,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }).show();
             }
-            if (iMileage<=0 && iFuel<=0)
-            {
-                dialogBuilder("Mileage and fuel are both set to zero. Are you sure?");
-            }
-            else if(iMileage<=0)
-            {
-                dialogBuilder("Mileage set to zero. Are you sure?");
-            }
-            else if(iFuel<=0)
-            {
-                dialogBuilder("Fuel set to zero. Are you sure?");
-            }
-            saveMileageFuel(iMileage, iFuel);
-            savePreference();
         }
     }
-
 
     private void dialogBuilder(String message)
     {
@@ -90,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 catch (Exception e)
                 {
+                    finish();
                     // info cant be empty
                     new AlertDialog.Builder(RegisterActivity.this)
                             .setTitle("Warning")
@@ -133,6 +138,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
     private void saveMileageFuel(int mileage, int fuel)
     {
