@@ -1,6 +1,7 @@
 package me.infiniteimmagionation.fuellog;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -17,19 +18,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         if(sharedpreferences.contains("YesNo"))
         {
-            if (sharedpreferences.getBoolean("YesNo")==true){}
+            if (sharedpreferences.getBoolean("YesNo", false))
+            {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+            }
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
         }
         else
         {
-
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
