@@ -18,7 +18,7 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity android:name=".LastNActivity" />
         <activity android:name=".DateViewActivity" />
         <activity
@@ -28,7 +28,8 @@
         <activity
             android:name=".MainHActivity"
             android:label="@string/title_activity_main_h"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddActivity"></activity>
     </application>
 
 </manifest>

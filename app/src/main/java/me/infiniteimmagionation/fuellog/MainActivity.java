@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {//implements View.OnClickListener {
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
@@ -19,14 +19,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         if(sharedpreferences.contains("YesNo"))
         {
             if (sharedpreferences.getBoolean("YesNo", true))
             {
-                setContentView(R.layout.activity_main);
+                    setContentView(R.layout.activity_main);
+                FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+                final Intent intent = new Intent(this, AddActivity.class);
+                myFab.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        startActivity(intent);
+                    }
+                });
             }
             else
             {
@@ -39,19 +45,19 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         }
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
     @Override
     public void onBackPressed() {
         moveTaskToBack(false);
     }
-
+//    @Override
+//    public void onClick(View v)
+//    {
+//        if(v.getId()==R.id.fab)
+//        {
+//            Intent intent = new Intent(this, AddActivity.class);
+//            startActivity(intent);
+//        }
+//
+//    }
 }
