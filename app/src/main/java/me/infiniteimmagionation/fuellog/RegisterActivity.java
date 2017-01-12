@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Date;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -52,14 +54,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 else
                 {
-                    saveMileageFuel(iMileage, iFuel);
-                    savePreference();
+                        saveMileageFuel(iMileage, iFuel);
+                        savePreference();
                 }
 //                saveMileageFuel(iMileage, iFuel);
 //                savePreference();
             }
             catch (Exception e)
             {
+                final Intent intent = new Intent(this, RegisterActivity.class);
                 new AlertDialog.Builder(RegisterActivity.this)
                         .setTitle("Warning")
                         .setMessage("Mileage/Fuel must be a number and can not be empty")
@@ -68,8 +71,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
+                                startActivity(intent);
                             }
                         }).show();
+
             }
         }
     }
@@ -145,5 +150,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         sharedpreferences.edit().putInt("Mileage", mileage).apply();
         sharedpreferences.edit().putInt("Fuel", fuel).apply();
+        Date date = new Date(System.currentTimeMillis());
+        sharedpreferences.edit().putLong("Date", date.getTime()).apply();
+    }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
     }
 }
