@@ -28,14 +28,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "fuelConsumptionTracer";
 
     // Contacts table name
-    private static final String TABLE_REFILLS = "refils";
+    private static final String TABLE_REFILLS = "REFILLS";
 
     // Contacts Table Columns names
-    private static final String KEY_ID = "id";
-    private static final String KEY_TPL = "tpl";
-    private static final String KEY_DATE = "date";
-    private static final String KEY_CDOP = "cdop";
-    private static final String KEY_KM = "km";
+    private static final String KEY_ID = "ID";
+    private static final String KEY_TPL = "TPL";
+    private static final String KEY_DATE = "DATE";
+    private static final String KEY_CDOP = "CDOP";
+    private static final String KEY_KM = "KM";
 
     public static synchronized DatabaseHandler getInstance(Context context)
     {
@@ -52,11 +52,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_REFILLS_TABLE = "CREATE TABLE IF NOT EXISTS" + TABLE_REFILLS + "("
+        String CREATE_REFILLS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_REFILLS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_TPL + " TEXT,"
-                + KEY_DATE + " INT"
-                + KEY_CDOP + " FLOAT"
+                + KEY_DATE + " INT,"
+                + KEY_CDOP + " FLOAT,"
                 + KEY_KM + " BIGINT"
                 + ")";
         db.execSQL(CREATE_REFILLS_TABLE);

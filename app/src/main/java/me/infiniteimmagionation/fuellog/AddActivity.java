@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -28,10 +29,12 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+        Button saveDugme = (Button)findViewById(R.id.saveAddButton);
+        saveDugme.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.saveButton)
+        if(v.getId()==R.id.saveAddButton)
         {
             boolean fail;
             // get status trenutni iz shared i interne memorije
