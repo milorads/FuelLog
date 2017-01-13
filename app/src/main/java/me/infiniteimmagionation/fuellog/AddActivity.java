@@ -3,6 +3,7 @@ package me.infiniteimmagionation.fuellog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,8 +40,14 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             int fuel =0;
             int fuelPrev = 0;
             float price=0;
+            long startMileage = 0;
+            long startDate = 0;
             if(sharedpreferences.contains("Fuel")){
                 fuelPrev = sharedpreferences.getInt("Fuel", 0);}
+            if(sharedpreferences.contains("Mileage")){
+                startMileage = sharedpreferences.getLong("Mileage", 0);}
+            if(sharedpreferences.contains("Date")){
+                startDate = sharedpreferences.getLong("Date", 0);}
             /**
              * CRUD Operations
              * */
@@ -70,9 +81,35 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             {
                 DatabaseModel model = new DatabaseModel(tpl, System.currentTimeMillis(), price, mileage);
                 db.addRefill(model);
+
                 // pravljenje report-a
+                WriteReport(model, fuel, fuelPrev, startMileage, startDate);
                 // vracanje u main
+                finish();
             }
         }
+    }
+    private void WriteReport(DatabaseModel model, int fuel, int prevFuel, long startMileage, long startDate)
+    {
+        // write new fuel state to sharedprefs
+        sharedpreferences.edit().putInt("Fuel", fuel).apply();
+        String FILENAME = "Report"+Long.toString(model.get_date());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = formatter.format(new Date(model.get_date()));
+        String textmsg = "Report for " + dateString + "\n\n";
+        long range = startMileage - model.get_km();
+        long pastTime = startDate - model.get_date();
+        long days = TimeUnit.MILLISECONDS.toDays(pastTime);
+        textmsg+="For the period of " + days + ", the range of: "+range+" was covered.";
+
+        try {
+            FileOutputStream fileout=openFileOutput(FILENAME, MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+            outputWriter.write(textmsg);
+            outputWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

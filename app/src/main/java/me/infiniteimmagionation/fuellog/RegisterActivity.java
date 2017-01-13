@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 {
                     EditText mileage = (EditText) findViewById(R.id.editText);
                     EditText fuelleft = (EditText) findViewById(R.id.editText2);
-                    int iMileage = Integer.parseInt(mileage.getText().toString());
+                    long iMileage = Integer.parseInt(mileage.getText().toString());
                     int iFuel = Integer.parseInt(fuelleft.getText().toString());
                     saveMileageFuel(iMileage, iFuel);
                     savePreference();
@@ -145,10 +145,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         startActivity(intent);
         finish();
     }
-    private void saveMileageFuel(int mileage, int fuel)
+    private void saveMileageFuel(long mileage, int fuel)
     {
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
-        sharedpreferences.edit().putInt("Mileage", mileage).apply();
+        sharedpreferences.edit().putLong("Mileage", mileage).apply();
         sharedpreferences.edit().putInt("Fuel", fuel).apply();
         sharedpreferences.edit().putLong("Date", System.currentTimeMillis()).apply();
     }
