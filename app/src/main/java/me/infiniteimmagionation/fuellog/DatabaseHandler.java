@@ -18,6 +18,9 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
+    // Singleton
+    private static DatabaseHandler dbInstance;
+
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
@@ -34,7 +37,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_CDOP = "cdop";
     private static final String KEY_KM = "km";
 
-    public DatabaseHandler(Context context) {
+    public static synchronized DatabaseHandler getInstance(Context context)
+    {
+        if (dbInstance == null) {
+            dbInstance = new DatabaseHandler(context.getApplicationContext());
+        }
+        return dbInstance;
+    }
+
+    private DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -44,7 +55,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_REFILLS_TABLE = "CREATE TABLE IF NOT EXISTS" + TABLE_REFILLS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_TPL + " TEXT,"
-                + KEY_DATE + " DATE"
+                + KEY_DATE + " INT"
                 + KEY_CDOP + " FLOAT"
                 + KEY_KM + " BIGINT"
                 + ")";
@@ -69,13 +80,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, model.get_id());
+//        values.put(KEY_ID, model.get_id());
         values.put(KEY_TPL, model.get_tpl());
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        date = model.get_date();
-        values.put(KEY_DATE, dateFormat.format(date));
+        values.put(KEY_DATE, model.get_date());
 //        values.put(KEY_DATE, contact.get_date());
 
         values.put(KEY_CDOP, model.get_cdop());
@@ -85,7 +93,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert(TABLE_REFILLS, null, values);
         db.close(); // Closing database connection
     }
-    
+
     public List<DatabaseModel> getAllRefills() {
         List<DatabaseModel> refillList = new ArrayList<DatabaseModel>();
         // Select All Query
@@ -97,7 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                DatabaseModel refill = new DatabaseModel(cursor.getInt(0),cursor.getString(1), new Date(cursor.getLong(2)*1000), cursor.getFloat(3), cursor.getLong(4));
+                DatabaseModel refill = new DatabaseModel(cursor.getInt(0),cursor.getString(1), cursor.getLong(2), cursor.getFloat(3), cursor.getLong(4));
                 // Adding contact to list
                 refillList.add(refill);
             } while (cursor.moveToNext());

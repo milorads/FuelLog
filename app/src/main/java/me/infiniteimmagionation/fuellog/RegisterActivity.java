@@ -150,8 +150,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         sharedpreferences.edit().putInt("Mileage", mileage).apply();
         sharedpreferences.edit().putInt("Fuel", fuel).apply();
-        Date date = new Date(System.currentTimeMillis());
-        sharedpreferences.edit().putLong("Date", date.getTime()).apply();
+        sharedpreferences.edit().putLong("Date", System.currentTimeMillis()).apply();
     }
     @Override
     public void onBackPressed() {

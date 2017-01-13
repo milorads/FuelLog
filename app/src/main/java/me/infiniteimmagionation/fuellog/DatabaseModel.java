@@ -10,13 +10,19 @@ public class DatabaseModel {
     //private variables
     int _id;
     String _tpl;
-    Date _date;
+    long _date;
     float _cdop;
     long _km;
 
     // constructor
-    public DatabaseModel(int id, String totalOrPerLiter, Date date, float refillPrice, long km){
+    public DatabaseModel(int id, String totalOrPerLiter, long date, float refillPrice, long km){
         this._id = id;
+        this._tpl = totalOrPerLiter;
+        this._date = date;
+        this._cdop = refillPrice;
+        this._km = km;
+    }
+    public DatabaseModel(String totalOrPerLiter, long date, float refillPrice, long km){
         this._tpl = totalOrPerLiter;
         this._date = date;
         this._cdop = refillPrice;
@@ -31,7 +37,7 @@ public class DatabaseModel {
         return _tpl;
     }
 
-    public Date get_date() {
+    public long get_date() {
         return _date;
     }
 

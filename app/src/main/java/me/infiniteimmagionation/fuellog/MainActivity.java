@@ -15,12 +15,13 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
+//    public DatabaseHandler database = new DatabaseHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+        DatabaseHandler database = DatabaseHandler.getInstance(this);
         if(sharedpreferences.contains("YesNo"))
         {
             if (sharedpreferences.getBoolean("YesNo", true))
