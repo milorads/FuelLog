@@ -51,14 +51,4 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
     public void onBackPressed() {
         moveTaskToBack(false);
     }
-//    @Override
-//    public void onClick(View v)
-//    {
-//        if(v.getId()==R.id.fab)
-//        {
-//            Intent intent = new Intent(this, AddActivity.class);
-//            startActivity(intent);
-//        }
-//
-//    }
 }
