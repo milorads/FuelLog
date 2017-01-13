@@ -65,27 +65,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    void addRefill(DatabaseModel contact) {
+    void addRefill(DatabaseModel model) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, contact.get_id());
-        values.put(KEY_TPL, contact.get_tpl());
+        values.put(KEY_ID, model.get_id());
+        values.put(KEY_TPL, model.get_tpl());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
+        date = model.get_date();
         values.put(KEY_DATE, dateFormat.format(date));
 //        values.put(KEY_DATE, contact.get_date());
 
-        values.put(KEY_CDOP, contact.get_cdop());
-        values.put(KEY_KM, contact.get_km());
+        values.put(KEY_CDOP, model.get_cdop());
+        values.put(KEY_KM, model.get_km());
 
         // Inserting Row
         db.insert(TABLE_REFILLS, null, values);
         db.close(); // Closing database connection
     }
-
-    // Getting All Contacts
+    
     public List<DatabaseModel> getAllRefills() {
         List<DatabaseModel> refillList = new ArrayList<DatabaseModel>();
         // Select All Query
@@ -106,7 +106,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return contact list
         return refillList;
     }
-    
+
     public int getRefillCount() {
         String countQuery = "SELECT  * FROM " + TABLE_REFILLS;
         SQLiteDatabase db = this.getReadableDatabase();
