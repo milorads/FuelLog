@@ -50,6 +50,33 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:id="@+id/stanjePotrosenoText2" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="30dp">
+        </View>
+
+        <TextView
+            android:text="@string/IzlistajText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8"
+            android:gravity="center"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/previousLookup"
+            android:entries="@array/previousLookup"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:text="@string/Prikaz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/prikazButton"
+            android:layout_gravity="center"/>
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

@@ -10,13 +10,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {//implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
 
     private void InitializeItems()
     {
+        Button prikazButton = (Button) findViewById(R.id.prikazButton);
+        prikazButton.setOnClickListener(this);
         TextView stanjeT1 = (TextView)findViewById(R.id.stanjeDanText2);
         TextView stanjeT2 = (TextView)findViewById(R.id.stanjePredjenoText2);
         TextView stanjeT3 = (TextView)findViewById(R.id.stanjePotrosenoText2);
@@ -95,5 +99,34 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
     @Override
     public void onBackPressed() {
         moveTaskToBack(false);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if(v.getId()==R.id.prikazButton)
+        {
+            Intent intent = new Intent(this, LastNActivity.class);
+            Spinner s = (Spinner)findViewById(R.id.previousLookup);
+            intent.putExtra("spinner", checkSpinner(s));
+            startActivity(intent);
+        }
+    }
+    private int checkSpinner(Spinner s)
+    {
+        String text = s.getSelectedItem().toString();
+        switch (text) {
+            case "7 Dana":
+                return 7;
+            case "1 Mjesec":
+                return 30;
+            case "2 Mjeseca":
+                return 60;
+            case "6 Mjeseci":
+                return 180;
+            case "12 Mjeseci":
+                return 365;
+        }
+        return 0;
     }
 }

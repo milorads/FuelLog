@@ -10,4 +10,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="me.infiniteimmagionation.fuellog.LastNActivity">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:text="@string/PredjenoPreth"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/stanjePredjenoTextIP" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/stanjePredjenoText2IP" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/stanjePotrosenoTextIP"
+            android:text="@string/UtrosakPreth" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/stanjePotrosenoText2IP" />
+
+    </LinearLayout>
 </RelativeLayout>

@@ -5,10 +5,22 @@
     <string name="title_activity_list_and_settings">ListAndSettings</string>
     <string name="title_activity_main_h">MainHActivity</string>
     <string name="Stanje">Stanje goriva na dan</string>
+    <string name="StanjePreth">Stanje goriva za izabrani period</string>
     <string name="Predjeno">Predjeno puta od pocetka racunanja</string>
+    <string name="PredjenoPreth">Predjeno puta za izabrani period</string>
     <string name="Utrosak">Utrosak goriva od pocetka racunanja</string>
+    <string name="UtrosakPreth">Utrosak goriva za izabrani period</string>
+    <string name="Prikaz">Prikaz</string>
+    <string name="IzlistajText">Prikaz prethodnog perioda</string>
     <string-array name="perLiter_or_Total">
         <item>Per liter</item>
         <item>Total</item>
+    </string-array>
+    <string-array name="previousLookup">
+        <item>7 Dana</item>
+        <item>1 Mjesec</item>
+        <item>2 Mjeseca</item>
+        <item>6 Mjeseci</item>
+        <item>12 Mjeseci</item>
     </string-array>
 </resources>

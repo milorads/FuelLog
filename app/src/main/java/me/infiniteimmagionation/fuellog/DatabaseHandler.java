@@ -133,6 +133,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return model;
     }
 
+
+
     public int getRefillCount() {
         String countQuery = "SELECT  * FROM " + TABLE_REFILLS;
         SQLiteDatabase db = this.getReadableDatabase();
