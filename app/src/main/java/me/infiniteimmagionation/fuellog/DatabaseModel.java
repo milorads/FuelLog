@@ -13,20 +13,23 @@ public class DatabaseModel {
     long _date;
     float _cdop;
     long _km;
+    long _lit;
 
     // constructor
-    public DatabaseModel(int id, String totalOrPerLiter, long date, float refillPrice, long km){
+    public DatabaseModel(int id, String totalOrPerLiter, long date, float refillPrice, long km, long liters){
         this._id = id;
         this._tpl = totalOrPerLiter;
         this._date = date;
         this._cdop = refillPrice;
         this._km = km;
+        this._lit = liters;
     }
-    public DatabaseModel(String totalOrPerLiter, long date, float refillPrice, long km){
+    public DatabaseModel(String totalOrPerLiter, long date, float refillPrice, long km, long liters){
         this._tpl = totalOrPerLiter;
         this._date = date;
         this._cdop = refillPrice;
         this._km = km;
+        this._lit = liters;
     }
 
     public int get_id() {
@@ -48,4 +51,6 @@ public class DatabaseModel {
     public long get_km() {
         return _km;
     }
+
+    public long get_lit(){return _lit;}
 }

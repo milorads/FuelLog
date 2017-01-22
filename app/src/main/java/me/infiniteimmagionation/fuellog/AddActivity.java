@@ -82,7 +82,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             }
             if(!fail)
             {
-                DatabaseModel model = new DatabaseModel(tpl, System.currentTimeMillis(), price, mileage);
+                DatabaseModel model = new DatabaseModel(tpl, System.currentTimeMillis(), price, mileage, fuel);
                 db.addRefill(model);
 
                 // pravljenje report-a

@@ -57,26 +57,30 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
 
     private void InitializeItems()
     {
-        TextView stanjeT1 = (TextView)findViewById(R.id.stanjeDanText);
-        TextView stanjeT2 = (TextView)findViewById(R.id.stanjeDanText2);
-        TextView stanjeT3 = (TextView)findViewById(R.id.stanjePredjenoText2);
-        TextView stanjeT4 = (TextView)findViewById(R.id.stanjePotrosenoText2);
-        String stanjeNaDan = getResources().getString(R.string.Stanje);
-        stanjeNaDan += getTodayDate();
+        TextView stanjeT1 = (TextView)findViewById(R.id.stanjeDanText2);
+        TextView stanjeT2 = (TextView)findViewById(R.id.stanjePredjenoText2);
+        TextView stanjeT3 = (TextView)findViewById(R.id.stanjePotrosenoText2);
+        String stanjeNaDan = getTodayDate();
         stanjeT1.setText(stanjeNaDan);
 
         long startMileage = 0;
         if(sharedpreferences.contains("Mileage")){
             startMileage = sharedpreferences.getLong("Mileage", 0);}
-//        List<DatabaseModel> lista = database.getAllRefills();
         DatabaseModel model = database.getLastMileage();
         long predjenPut = 0;
         if (model!=null)
-            predjenPut = model.get_km();
-        stanjeT3.setText(predjenPut + " km");
+            predjenPut = model.get_km() -startMileage;
+        stanjeT2.setText(predjenPut + " km");
 
+        long utrosenoGorivo = 0;
+        List<DatabaseModel> lista = database.getAllRefills();
+        for (DatabaseModel m:lista) {
 
+            utrosenoGorivo += m.get_lit();
+        }
+        stanjeT3.setText(Long.toString(utrosenoGorivo));
     }
+
     private static String getTodayDate()
     {
         Calendar c = Calendar.getInstance();

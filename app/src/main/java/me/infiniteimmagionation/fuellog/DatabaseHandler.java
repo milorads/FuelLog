@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DATE = "DATE";
     private static final String KEY_CDOP = "CDOP";
     private static final String KEY_KM = "KM";
+    private static final String KEY_LIT = "LITERS";
 
     public static synchronized DatabaseHandler getInstance(Context context)
     {
@@ -55,7 +57,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_TPL + " TEXT,"
                 + KEY_DATE + " INT,"
                 + KEY_CDOP + " FLOAT,"
-                + KEY_KM + " BIGINT"
+                + KEY_KM + " BIGINT,"
+                + KEY_LIT + " BIGINT"
                 + ")";
         db.execSQL(CREATE_REFILLS_TABLE);
     }
@@ -87,6 +90,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_CDOP, model.get_cdop());
         values.put(KEY_KM, model.get_km());
 
+        values.put(KEY_LIT, model.get_lit());
+
+
         // Inserting Row
         db.insert(TABLE_REFILLS, null, values);
         db.close(); // Closing database connection
@@ -103,7 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                DatabaseModel refill = new DatabaseModel(cursor.getInt(0),cursor.getString(1), cursor.getLong(2), cursor.getFloat(3), cursor.getLong(4));
+                DatabaseModel refill = new DatabaseModel(cursor.getInt(0),cursor.getString(1), cursor.getLong(2), cursor.getFloat(3), cursor.getLong(4), cursor.getLong(5));
                 // Adding contact to list
                 refillList.add(refill);
             } while (cursor.moveToNext());
@@ -122,7 +128,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
-                model = new DatabaseModel(cursor.getInt(0),cursor.getString(1), cursor.getLong(2), cursor.getFloat(3), cursor.getLong(4));
+                model = new DatabaseModel(cursor.getInt(0),cursor.getString(1), cursor.getLong(2), cursor.getFloat(3), cursor.getLong(4), cursor.getLong(5));
         }
         return model;
     }
