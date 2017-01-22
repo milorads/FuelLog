@@ -10,7 +10,9 @@ import android.provider.ContactsContract;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by msekulovic on 1/12/2017.
@@ -55,7 +57,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_REFILLS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_REFILLS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_TPL + " TEXT,"
-                + KEY_DATE + " INT,"
+                + KEY_DATE + " BIGINT,"
                 + KEY_CDOP + " FLOAT,"
                 + KEY_KM + " BIGINT,"
                 + KEY_LIT + " BIGINT"
@@ -145,22 +147,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    public void getConsumptionPerPeriod(int nOfDays)
+    public Map<String,String> getConsumptionPerPeriod(int nOfDays)
     {
-        int gornjaGranica = 0, donjaGranica = 0;
-        String selectQueryFirst = "SELECT * FROM " + TABLE_REFILLS +" WHERE AGE BETWEEN "+donjaGranica+" AND "+gornjaGranica+" ORDER BY "+KEY_DATE+" DESC LIMIT 1";
-        String selectQueryLast = "SELECT * FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+donjaGranica+" AND "+gornjaGranica+" ORDER BY "+KEY_DATE+" ASC LIMIT 1";
+        long gornjaGranica = getToday();
+        long donjaGranica = getPreviousDate(gornjaGranica, nOfDays);
+
+        String selectQueryFirst = "SELECT "+KEY_KM+", "+KEY_LIT+" FROM " + TABLE_REFILLS +" WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" DESC LIMIT 1";
+        String selectQueryLast = "SELECT "+KEY_KM+", "+KEY_LIT+" FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" ASC LIMIT 1";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursorFirst = db.rawQuery(selectQueryFirst, null);
         Cursor cursorLast = db.rawQuery(selectQueryLast, null);
-
+        long fKm = 0, fLt = 0, lKm = 0, lLt = 0;
         // looping through all rows and adding to list
         if (cursorFirst.moveToFirst()) {
-
+            fKm = cursorFirst.getLong(0);
+             fLt =cursorFirst.getLong(1);
         }
         if (cursorLast.moveToFirst()) {
-
+            lKm = cursorFirst.getLong(0);
+            lLt =cursorFirst.getLong(1);
         }
+        final long predjenPut = fKm - lKm;
+        final long utrosakGoriva = fLt - lLt;
+        Map<String,String> map = new HashMap<String, String>(){{
+            put("put", Long.toString(predjenPut));
+            put("gorivo", Long.toString(utrosakGoriva));
+        }};
+        return map;
+    }
+    private long getToday(){
+        return System.currentTimeMillis();
+    }
+    private long getPreviousDate(long today, int days)
+    {
+        Date date=new Date(today);
+        Date dateBefore = new Date(date.getTime() - days * 24 * 3600 * 1000 );
+        return dateBefore.getTime();
     }
 
 }

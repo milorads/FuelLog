@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.Map;
+
 public class LastNActivity extends AppCompatActivity {
 
     DatabaseHandler database;
@@ -18,5 +20,8 @@ public class LastNActivity extends AppCompatActivity {
         int period = 0;
         intent.getIntExtra("spinner", period);
         database = DatabaseHandler.getInstance(this);
+        Map<String, String> map = database.getConsumptionPerPeriod(period);
+        String predjenPut = (String) map.get("put");
+        String utrosakGoriva = (String) map.get("gorivo");
     }
 }
