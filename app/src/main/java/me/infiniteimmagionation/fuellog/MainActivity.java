@@ -10,23 +10,30 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {//implements View.OnClickListener {
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
+    DatabaseHandler database;
 //    public DatabaseHandler database = new DatabaseHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
-        DatabaseHandler database = DatabaseHandler.getInstance(this);
+        database = DatabaseHandler.getInstance(this);
         if(sharedpreferences.contains("YesNo"))
         {
             if (sharedpreferences.getBoolean("YesNo", true))
             {
                     setContentView(R.layout.activity_main);
+                InitializeItems();
                 FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
                 final Intent intent = new Intent(this, AddActivity.class);
                 myFab.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +54,34 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
             startActivity(intent);
         }
     }
+
+    private void InitializeItems()
+    {
+        TextView stanjeT1 = (TextView)findViewById(R.id.stanjeDanText);
+        TextView stanjeT2 = (TextView)findViewById(R.id.stanjeDanText2);
+        String stanjeNaDan = getResources().getString(R.string.Stanje);
+        stanjeNaDan += getTodayDate();
+        stanjeT1.setText(stanjeNaDan);
+
+        long startMileage = 0;
+        if(sharedpreferences.contains("Mileage")){
+            startMileage = sharedpreferences.getLong("Mileage", 0);}
+        List<DatabaseModel> lista = database.getAllRefills();
+        for (DatabaseModel l:lista)
+        {
+
+        }
+    }
+    private static String getTodayDate()
+    {
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
+        return  formattedDate;
+    }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(false);

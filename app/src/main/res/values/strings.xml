@@ -4,6 +4,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_list_and_settings">ListAndSettings</string>
     <string name="title_activity_main_h">MainHActivity</string>
+    <string name="Stanje">Stanje goriva na dan</string>
     <string-array name="perLiter_or_Total">
         <item>Per liter</item>
         <item>Total</item>
