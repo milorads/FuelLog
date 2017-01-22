@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
             utrosenoGorivo += m.get_lit();
         }
         stanjeT3.setText(Long.toString(utrosenoGorivo));
+        // test commit
     }
 
     private static String getTodayDate()
