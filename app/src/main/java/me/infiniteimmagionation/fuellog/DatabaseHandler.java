@@ -145,4 +145,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    public void getConsumptionPerPeriod(int nOfDays)
+    {
+        int gornjaGranica = 0, donjaGranica = 0;
+        String selectQueryFirst = "SELECT * FROM " + TABLE_REFILLS +" WHERE AGE BETWEEN "+donjaGranica+" AND "+gornjaGranica+" ORDER BY "+KEY_DATE+" DESC LIMIT 1";
+        String selectQueryLast = "SELECT * FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+donjaGranica+" AND "+gornjaGranica+" ORDER BY "+KEY_DATE+" ASC LIMIT 1";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursorFirst = db.rawQuery(selectQueryFirst, null);
+        Cursor cursorLast = db.rawQuery(selectQueryLast, null);
+
+        // looping through all rows and adding to list
+        if (cursorFirst.moveToFirst()) {
+
+        }
+        if (cursorLast.moveToFirst()) {
+
+        }
+    }
+
 }

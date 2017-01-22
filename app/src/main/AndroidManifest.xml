@@ -25,10 +25,6 @@
             android:name=".ListAndSettings"
             android:label="@string/title_activity_list_and_settings"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainHActivity"
-            android:label="@string/title_activity_main_h"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddActivity"></activity>
     </application>
 

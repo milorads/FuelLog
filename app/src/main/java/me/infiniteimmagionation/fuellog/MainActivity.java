@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
-    DatabaseHandler database;
+     public DatabaseHandler database;
 //    public DatabaseHandler database = new DatabaseHandler(this);
 
     @Override
