@@ -152,23 +152,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         long gornjaGranica = getToday();
         long donjaGranica = getPreviousDate(gornjaGranica, nOfDays);
 
-        String selectQueryFirst = "SELECT "+KEY_KM+", "+KEY_LIT+" FROM " + TABLE_REFILLS +" WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" DESC LIMIT 1";
-        String selectQueryLast = "SELECT "+KEY_KM+", "+KEY_LIT+" FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" ASC LIMIT 1";
+        String selectQueryFirst = "SELECT "+KEY_KM+" FROM " + TABLE_REFILLS +" WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" DESC LIMIT 1";
+        String selectQueryLast = "SELECT "+KEY_KM+" FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" ASC LIMIT 1";
+        String litQuery = "SELECT "+KEY_LIT+" FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica);
         SQLiteDatabase db = this.getWritableDatabase();
+        Cursor litCursor = db.rawQuery(litQuery, null);
         Cursor cursorFirst = db.rawQuery(selectQueryFirst, null);
         Cursor cursorLast = db.rawQuery(selectQueryLast, null);
-        long fKm = 0, fLt = 0, lKm = 0, lLt = 0;
+        long fKm = 0, lKm = 0, uG = 0;
         // looping through all rows and adding to list
         if (cursorFirst.moveToFirst()) {
             fKm = cursorFirst.getLong(0);
-             fLt =cursorFirst.getLong(1);
         }
         if (cursorLast.moveToFirst()) {
             lKm = cursorFirst.getLong(0);
-            lLt =cursorFirst.getLong(1);
+        }
+        if (litCursor.moveToFirst()) {
+            do {
+                uG += litCursor.getLong(0);
+            } while (litCursor.moveToNext());
         }
         final long predjenPut = fKm - lKm;
-        final long utrosakGoriva = fLt - lLt;
+        final long utrosakGoriva = uG;
         Map<String,String> map = new HashMap<String, String>(){{
             put("put", Long.toString(predjenPut));
             put("gorivo", Long.toString(utrosakGoriva));
