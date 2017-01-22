@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
     {
         TextView stanjeT1 = (TextView)findViewById(R.id.stanjeDanText);
         TextView stanjeT2 = (TextView)findViewById(R.id.stanjeDanText2);
+        TextView stanjeT3 = (TextView)findViewById(R.id.stanjePredjenoText2);
+        TextView stanjeT4 = (TextView)findViewById(R.id.stanjePotrosenoText2);
         String stanjeNaDan = getResources().getString(R.string.Stanje);
         stanjeNaDan += getTodayDate();
         stanjeT1.setText(stanjeNaDan);
@@ -66,11 +68,14 @@ public class MainActivity extends AppCompatActivity {//implements View.OnClickLi
         long startMileage = 0;
         if(sharedpreferences.contains("Mileage")){
             startMileage = sharedpreferences.getLong("Mileage", 0);}
-        List<DatabaseModel> lista = database.getAllRefills();
-        for (DatabaseModel l:lista)
-        {
+//        List<DatabaseModel> lista = database.getAllRefills();
+        DatabaseModel model = database.getLastMileage();
+        long predjenPut = 0;
+        if (model!=null)
+            predjenPut = model.get_km();
+        stanjeT3.setText(predjenPut + " km");
 
-        }
+
     }
     private static String getTodayDate()
     {

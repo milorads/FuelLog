@@ -26,26 +26,28 @@
             android:gravity="center"/>
 
         <TextView
-            android:text="TextView"
+            android:text="@string/Predjeno"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:id="@+id/stanjePredjenoText" />
 
         <TextView
-            android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:id="@+id/stanjePredjenoText2" />
 
         <TextView
-            android:text="TextView"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:id="@+id/stanjePotrosenoText" />
+            android:id="@+id/stanjePotrosenoText"
+            android:text="@string/Utrosak" />
 
         <TextView
-            android:text="TextView"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:id="@+id/stanjePotrosenoText2" />
     </LinearLayout>

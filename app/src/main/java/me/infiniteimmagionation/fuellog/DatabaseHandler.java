@@ -27,10 +27,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "fuelConsumptionTracer";
 
-    // Contacts table name
     private static final String TABLE_REFILLS = "REFILLS";
 
-    // Contacts Table Columns names
     private static final String KEY_ID = "ID";
     private static final String KEY_TPL = "TPL";
     private static final String KEY_DATE = "DATE";
@@ -113,6 +111,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // return contact list
         return refillList;
+    }
+
+    public DatabaseModel getLastMileage()
+    {
+        DatabaseModel model = null;
+        String selectQuery = "SELECT * FROM " + TABLE_REFILLS +" ORDER BY "+KEY_KM+" DESC LIMIT 1";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+                model = new DatabaseModel(cursor.getInt(0),cursor.getString(1), cursor.getLong(2), cursor.getFloat(3), cursor.getLong(4));
+        }
+        return model;
     }
 
     public int getRefillCount() {
