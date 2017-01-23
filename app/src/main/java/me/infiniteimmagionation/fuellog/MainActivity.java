@@ -25,6 +25,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      public DatabaseHandler database;
 //    public DatabaseHandler database = new DatabaseHandler(this);
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        InitializeItems();
+        initFab();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

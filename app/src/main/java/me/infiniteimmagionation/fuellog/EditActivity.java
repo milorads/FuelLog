@@ -34,16 +34,20 @@ public class EditActivity extends AppCompatActivity {
         context = this;
 
         modelList = new ArrayList<DatabaseModel>();
-        DatabaseHandler db = DatabaseHandler.getInstance(this);
         listView = (ListView) findViewById(R.id.listView);
-        List<DatabaseModel> models = db.getAllRefills();
+Initialize();
+
+    }
+
+    private void Initialize()
+    {
+        List<DatabaseModel> models = database.getAllRefills();
 
         ArrayList<DatabaseModel> arrayOfUsers = new ArrayList<DatabaseModel>();
         DatabaseModelAdapter adapter = new DatabaseModelAdapter(this, arrayOfUsers);
-        ListView listView = (ListView) findViewById(R.id.listView);
+        final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        String model = "";
         for (DatabaseModel m : models) {
             adapter.add(m);
             modelList.add(m);
@@ -79,18 +83,19 @@ public class EditActivity extends AppCompatActivity {
 //                builder.setIcon(R.drawable.galleryalart);
 
                 builder.setView(v).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                popupHandler(position, v);
-                            }}).setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        popupHandler(position, v);
+                        Initialize();
+                    }}).setNegativeButton("Cancel", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
-            builder.create();
-            builder.show();
+                builder.create();
+                builder.show();
 
             }
         });
@@ -108,7 +113,7 @@ public class EditActivity extends AppCompatActivity {
         boolean fail;
         long mileage =0;
         int fuel =0;
-        int price = 0;
+        float price = 0;
         try {
             mi = (EditText) v.findViewById(R.id.editMileageText);
             pr = (EditText) v.findViewById(R.id.editPriceText);
@@ -122,7 +127,7 @@ public class EditActivity extends AppCompatActivity {
             fail = false;
             mileage = Integer.parseInt(mi.getText().toString());
             fuel = Integer.parseInt(fl.getText().toString());
-            price = Integer.parseInt(pr.getText().toString());
+            price = Float.parseFloat(pr.getText().toString());
         }
         catch (Exception e)
         {
