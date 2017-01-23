@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_edit"
     android:layout_width="match_parent"
@@ -16,6 +17,17 @@
         android:layout_height="match_parent"
         >
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/imageView2"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:textAlignment="center"/>
+
         <TextView
             android:text="@string/Editor"
             android:layout_width="match_parent"
@@ -30,6 +42,7 @@
             android:id="@+id/listView"
             android:footerDividersEnabled="false"
             android:scrollbars="vertical"/>
+
     </LinearLayout>
 
 </RelativeLayout>
