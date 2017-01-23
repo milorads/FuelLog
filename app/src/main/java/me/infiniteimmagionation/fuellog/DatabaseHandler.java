@@ -2,6 +2,7 @@ package me.infiniteimmagionation.fuellog;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -147,7 +148,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    public Map<String,String> getConsumptionPerPeriod(int nOfDays)
+    public Map<String,String> getConsumptionPerPeriod(int nOfDays, long startMileage, long startDate)
     {
         long gornjaGranica = getToday();
         long donjaGranica = getPreviousDate(gornjaGranica, nOfDays);
@@ -165,14 +166,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             fKm = cursorFirst.getLong(0);
         }
         if (cursorLast.moveToFirst()) {
-            lKm = cursorFirst.getLong(0);
+            lKm = cursorLast.getLong(0);
         }
         if (litCursor.moveToFirst()) {
             do {
                 uG += litCursor.getLong(0);
             } while (litCursor.moveToNext());
         }
-        final long predjenPut = fKm - lKm;
+        long pPut = 0;
+        if (fKm == lKm){
+            if (startDate <=  gornjaGranica && startDate >= donjaGranica){
+                pPut = fKm - startMileage;
+            }
+            else{
+                pPut = fKm - lKm;}
+        }
+        final long predjenPut = pPut;
         final long utrosakGoriva = uG;
         Map<String,String> map = new HashMap<String, String>(){{
             put("put", Long.toString(predjenPut));
