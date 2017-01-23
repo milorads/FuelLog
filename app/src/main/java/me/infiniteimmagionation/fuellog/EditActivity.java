@@ -19,27 +19,15 @@ public class EditActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         List<DatabaseModel> models = db.getAllRefills();
 
+        ArrayList<DatabaseModel> arrayOfUsers = new ArrayList<DatabaseModel>();
+        DatabaseModelAdapter adapter = new DatabaseModelAdapter(this, arrayOfUsers);
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
         String model = "";
         for (DatabaseModel m : models) {
-            model = "";
+            adapter.add(m);
         }
-
-        List<String> your_array_list = new ArrayList<String>();
-        your_array_list.add("foo");
-        your_array_list.add("bar");
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayofName);
-//
-//        gridView.setAdapter(adapter);
-//
-//        gridView.setOnItemClickListener(new OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v,
-//                                    int position, long id) {
-//                Toast.makeText(getApplicationContext(),
-//                        ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
 
     }
 }

@@ -134,19 +134,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String text = s.getSelectedItem().toString();
         int broj = 0;
         switch (text) {
-            case "7 Dana":
+            case "7 Days":
                 broj= 7;
                 break;
-            case "1 Mjesec":
+            case "1 Month":
                 broj= 30;
                 break;
-            case "2 Mjeseca":
+            case "2 Months":
                 broj= 60;
                 break;
-            case "6 Mjeseci":
+            case "6 Months":
                 broj= 180;
                 break;
-            case "12 Mjeseci":
+            case "12 Months":
                 broj= 365;
                 break;
         }

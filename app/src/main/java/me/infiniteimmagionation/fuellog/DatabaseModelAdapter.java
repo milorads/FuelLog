@@ -37,14 +37,14 @@ public class DatabaseModelAdapter extends ArrayAdapter<DatabaseModel> {
         TextView dmKM = (TextView) convertView.findViewById(R.id.itemKM);
         TextView dmLit = (TextView) convertView.findViewById(R.id.itemLiters);
         // Populate the data into the template view using the data object
-        dmID.setText(model.get_id());
+        dmID.setText("Identifier: "+Integer.toString(model.get_id()));
         dmTPL.setText(model.get_tpl());
         Date date = new Date(model.get_date());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        dmDate.setText(formatter.format(date.getTime()));
-        dmCDop.setText(Float.toString(model.get_cdop()));
-        dmKM.setText(Long.toString(model.get_km()));
-        dmLit.setText(Long.toString(model.get_lit()));
+        dmDate.setText("Date of input: "+formatter.format(date.getTime()));
+        dmCDop.setText("Price: "+Float.toString(model.get_cdop()));
+        dmKM.setText("Mileage covered: "+Long.toString(model.get_km()));
+        dmLit.setText("Liters added: "+Long.toString(model.get_lit()));
         // Return the completed view to render on screen
         return convertView;
     }
