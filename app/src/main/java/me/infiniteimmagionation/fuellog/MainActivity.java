@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView stanjeT1 = (TextView)findViewById(R.id.stanjeDanText2);
         TextView stanjeT2 = (TextView)findViewById(R.id.stanjePredjenoText2);
         TextView stanjeT3 = (TextView)findViewById(R.id.stanjePotrosenoText2);
+        TextView stanjeT4 = (TextView)findViewById(R.id.averageText2);
         String stanjeNaDan = getTodayDate();
         stanjeT1.setText(stanjeNaDan);
 
@@ -84,8 +85,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             utrosenoGorivo += m.get_lit();
         }
         stanjeT3.setText(Long.toString(utrosenoGorivo));
-        // test commit
+
+        final long avg = (utrosenoGorivo*100)/predjenPut;
+        stanjeT4.setText(Long.toString(avg));
     }
+
 
     private static String getTodayDate()
     {

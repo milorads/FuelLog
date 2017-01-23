@@ -51,6 +51,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/stanjePotrosenoText2" />
 
+        <TextView
+            android:text="@string/ProsecnaPotrosnja"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/averageText" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/averageText2" />
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="30dp">
