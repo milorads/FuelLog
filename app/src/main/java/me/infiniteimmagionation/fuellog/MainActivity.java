@@ -37,13 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                     setContentView(R.layout.activity_main);
                 InitializeItems();
-                FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
-                final Intent intent = new Intent(this, AddActivity.class);
-                myFab.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        startActivity(intent);
-                    }
-                });
+                initFab();
             }
             else
             {
@@ -56,6 +50,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void initFab()
+    {
+        FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+        final Intent intent = new Intent(this, AddActivity.class);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+        FloatingActionButton myFab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        final Intent intent2 = new Intent(this, EditActivity.class);
+        myFab2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent2);
+            }
+        });
     }
 
     private void InitializeItems()

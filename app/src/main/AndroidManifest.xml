@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.infiniteimmagionation.fuellog">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/fuel_launcher"
@@ -25,7 +27,8 @@
             android:name=".ListAndSettings"
             android:label="@string/title_activity_list_and_settings"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddActivity"></activity>
+        <activity android:name=".AddActivity" />
+        <activity android:name=".EditActivity"></activity>
     </application>
 
 </manifest>
