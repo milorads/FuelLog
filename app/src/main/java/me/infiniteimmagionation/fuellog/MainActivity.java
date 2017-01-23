@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import me.infiniteimmagionation.fuellog.fragments.AddFragment;
 import me.infiniteimmagionation.fuellog.fragments.EditFragment;
 import me.infiniteimmagionation.fuellog.fragments.ListNFragment;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener {
+public class MainActivity extends FragmentActivity implements View.OnClickListener, AddFragment.OnFragmentInteractionListener, EditFragment.OnFragmentInteractionListener, ListNFragment.OnFragmentInteractionListener {
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
@@ -46,18 +47,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         {
             if (sharedpreferences.getBoolean("YesNo", true))
             {
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-                {
-                    setContentView(R.layout.activity_main_fragmented);
-                    InitializeItems();
-                    initFab();
-                }
-                else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-                {
+//                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+//                {
+//                    setContentView(R.layout.activity_main_fragmented);
+//                    InitializeItems();
+//                    initFab();
+//                }
+//                else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+//                {
                 setContentView(R.layout.activity_main);
-                InitializeItems();
+                    InitializeItems();
                 initFab();
-                }
+//                }
             }
             else
             {
@@ -178,15 +179,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     {
         if(v.getId()==R.id.prikazButton)
         {
+            Spinner s = (Spinner)findViewById(R.id.previousLookup);
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             {
                 ListNFragment l = ListNFragment.newInstance();
                 l.context = mainContext;
-                getSupportFragmentManager().beginTransaction().add(R.id.activity_add, l).commit();
+                l.odabirSpinnera(checkSpinner(s));
+                getSupportFragmentManager().beginTransaction().add(R.id.activity_last_n, l).commit();
             }
             else{
             Intent intent = new Intent(this, LastNActivity.class);
-            Spinner s = (Spinner)findViewById(R.id.previousLookup);
             intent.putExtra("spinner", checkSpinner(s));
             startActivity(intent);}
         }
