@@ -3,69 +3,77 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/itemID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:gravity="center"
-        android:textColor="@color/colorAccent"/>
-
-    <TextView
-        android:id="@+id/itemDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:gravity="center"
-        android:layout_weight="1"
-        android:textColor="@color/colorAccent"/>
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/itemLiters"
+            android:id="@+id/itemDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:gravity="center"
             android:layout_weight="1"
-            android:textColor="@color/colorAccentLight"/>
+            android:textColor="@color/colorAccent"/>
 
         <TextView
-            android:id="@+id/itemKM"
+            android:id="@+id/itemID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:gravity="center"
-            android:textColor="@color/colorAccentLight"
+            android:textColor="@color/colorAccent"
             android:layout_weight="1" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/itemRefillPrice"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/colorAccentLight"
-            android:gravity="center"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/itemTotalPerLiter"
+            <TextView
+                android:id="@+id/itemLiters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/colorAccentLight"/>
+
+            <TextView
+                android:id="@+id/itemKM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:textColor="@color/colorAccentLight"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/colorAccentLight"
-            android:gravity="center"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/itemRefillPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/itemTotalPerLiter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
