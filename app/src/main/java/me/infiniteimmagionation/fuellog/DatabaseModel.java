@@ -31,6 +31,12 @@ public class DatabaseModel {
         this._km = km;
         this._lit = liters;
     }
+    public DatabaseModel(String totalOrPerLiter, float refillPrice, long km, long liters){
+        this._tpl = totalOrPerLiter;
+        this._cdop = refillPrice;
+        this._km = km;
+        this._lit = liters;
+    }
 
     public int get_id() {
         return _id;

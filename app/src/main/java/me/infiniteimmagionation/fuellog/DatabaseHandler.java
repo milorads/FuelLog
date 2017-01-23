@@ -148,6 +148,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    public boolean editDatabaseEntry(int id, DatabaseModel newModel)
+    {
+//        String litQuery = "UPDATE "+TABLE_REFILLS+" SET "+KEY_TPL+"= '"+newModel.get_tpl()+"', "+KEY_CDOP+"= "+newModel.get_cdop();
+//        private static final String KEY_ID = "ID";// INT -
+//        private static final String KEY_TPL = "TPL";// STRING -
+//        private static final String KEY_DATE = "DATE";// LONG -
+//        private static final String KEY_CDOP = "CDOP";// FLOAT
+//        private static final String KEY_KM = "KM";// LONG
+//        private static final String KEY_LIT = "LITERS";// LONG
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(KEY_TPL, newModel.get_tpl());
+        args.put(KEY_CDOP, newModel.get_cdop());
+        args.put(KEY_KM, newModel.get_km());
+        args.put(KEY_LIT, newModel.get_lit());
+        return db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+    }
+
     public Map<String,String> getConsumptionPerPeriod(int nOfDays, long startMileage, long startDate)
     {
         long gornjaGranica = getToday();
