@@ -115,18 +115,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int checkSpinner(Spinner s)
     {
         String text = s.getSelectedItem().toString();
+        int broj = 0;
         switch (text) {
             case "7 Dana":
-                return 7;
+                broj= 7;
+                break;
             case "1 Mjesec":
-                return 30;
+                broj= 30;
+                break;
             case "2 Mjeseca":
-                return 60;
+                broj= 60;
+                break;
             case "6 Mjeseci":
-                return 180;
+                broj= 180;
+                break;
             case "12 Mjeseci":
-                return 365;
+                broj= 365;
+                break;
         }
-        return 0;
+        return broj;
     }
 }

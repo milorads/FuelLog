@@ -152,9 +152,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         long gornjaGranica = getToday();
         long donjaGranica = getPreviousDate(gornjaGranica, nOfDays);
 
-        String selectQueryFirst = "SELECT "+KEY_KM+" FROM " + TABLE_REFILLS +" WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" DESC LIMIT 1";
-        String selectQueryLast = "SELECT "+KEY_KM+" FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" ASC LIMIT 1";
-        String litQuery = "SELECT "+KEY_LIT+" FROM " + TABLE_REFILLS +"  WHERE AGE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica);
+        String selectQueryFirst = "SELECT "+KEY_KM+" FROM " + TABLE_REFILLS +" WHERE DATE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" DESC LIMIT 1";
+        String selectQueryLast = "SELECT "+KEY_KM+" FROM " + TABLE_REFILLS +"  WHERE DATE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica)+" ORDER BY "+KEY_DATE+" ASC LIMIT 1";
+        String litQuery = "SELECT "+KEY_LIT+" FROM " + TABLE_REFILLS +"  WHERE DATE BETWEEN "+Long.toString(donjaGranica)+" AND "+Long.toString(gornjaGranica);
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor litCursor = db.rawQuery(litQuery, null);
         Cursor cursorFirst = db.rawQuery(selectQueryFirst, null);
