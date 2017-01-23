@@ -60,6 +60,17 @@ public class EditActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 // Get the layout inflater
                 LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View v = inflater.inflate(R.layout.edit_database_item, null);
+                mi = (EditText) v.findViewById(R.id.editMileageText);
+                pr = (EditText) v.findViewById(R.id.editPriceText);
+                fl = (EditText) v.findViewById(R.id.editFuelText);
+                sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
+                mi.setText(Long.toString(modelList.get(position).get_km()));
+                pr.setText(Float.toString(modelList.get(position).get_cdop()));
+                fl.setText(Long.toString(modelList.get(position).get_lit()));
+                if (modelList.get(position).get_tpl().equals("Total")){
+                    sp.setSelection(1);}
+                else{sp.setSelection(0);}
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the
                 // dialog layout
@@ -67,30 +78,46 @@ public class EditActivity extends AppCompatActivity {
                 builder.setCancelable(false);
 //                builder.setIcon(R.drawable.galleryalart);
 
-                builder.setView(inflater.inflate(R.layout.activity_add, null)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                builder.setView(v).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                popupHandler(position);
-                                Toast.makeText(EditActivity.this,"Success", Toast.LENGTH_SHORT).show();
-                            }});
+                                popupHandler(position, v);
+                            }}).setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
             builder.create();
             builder.show();
 
             }
         });
     }
-    private void popupHandler(int modelPosition)
+
+    private EditText mi;
+    private EditText pr;
+    private EditText fl;
+    private Spinner sp;
+    private String tpl;
+
+    private void popupHandler(int modelPosition, View v)
     {
+        DatabaseModel model = modelList.get(modelPosition);
         boolean fail;
         long mileage =0;
         int fuel =0;
         int price = 0;
-        EditText mi = (EditText)findViewById(R.id.editMileageText);
-        EditText pr = (EditText)findViewById(R.id.editPriceText);
-        EditText fl = (EditText)findViewById(R.id.editFuelText);
-        Spinner sp = (Spinner)findViewById(R.id.editTPLSpinner);
-        String tpl = sp.getSelectedItem().toString();
-        try
+        try {
+            mi = (EditText) v.findViewById(R.id.editMileageText);
+            pr = (EditText) v.findViewById(R.id.editPriceText);
+            fl = (EditText) v.findViewById(R.id.editFuelText);
+            sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
+            tpl = sp.getSelectedItem().toString();
+        }
+        catch (Exception e){Toast.makeText(EditActivity.this,"Error", Toast.LENGTH_SHORT).show(); return;}
+            try
         {
             fail = false;
             mileage = Integer.parseInt(mi.getText().toString());
@@ -104,11 +131,13 @@ public class EditActivity extends AppCompatActivity {
         }
         if(!fail)
         {
-            DatabaseModel model = modelList.get(modelPosition);
             int id = model.get_id();
             //    public DatabaseModel(String totalOrPerLiter, float refillPrice, long km, long liters){
             DatabaseModel newModel = new DatabaseModel(tpl, price, mileage, fuel);
-            database.editDatabaseEntry(id, newModel);
+            boolean a = database.editDatabaseEntry(id, newModel);
+            if (a){
+            Toast.makeText(EditActivity.this,"Success", Toast.LENGTH_SHORT).show();}
+            else{Toast.makeText(EditActivity.this,"Error", Toast.LENGTH_SHORT).show();}
         }
     }
 }

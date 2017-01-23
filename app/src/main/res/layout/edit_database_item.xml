@@ -98,15 +98,5 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_horizontal_margin" />
-
-        <Button
-            android:text="Save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/saveAddButton" />
     </LinearLayout>
 </LinearLayout>
