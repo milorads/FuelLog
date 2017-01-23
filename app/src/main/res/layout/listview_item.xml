@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/itemDate"
@@ -16,7 +17,8 @@
         android:layout_height="wrap_content"
         android:text=""
         android:gravity="center"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:textColor="@color/colorAccent"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -29,7 +31,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:gravity="center"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorAccentLight"/>
 
         <TextView
             android:id="@+id/itemKM"
@@ -37,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:gravity="center"
+            android:textColor="@color/colorAccentLight"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -50,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
+            android:textColor="@color/colorAccentLight"
             android:gravity="center"
             android:layout_weight="1" />
 
@@ -58,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
+            android:textColor="@color/colorAccentLight"
             android:gravity="center"
             android:layout_weight="1" />
     </LinearLayout>

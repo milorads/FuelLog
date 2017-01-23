@@ -21,39 +21,45 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:id="@+id/stanjePredjenoTextIP" />
+            android:id="@+id/stanjePredjenoTextIP"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/stanjePredjenoText2IP" />
+            android:id="@+id/stanjePredjenoText2IP"
+            android:textColor="@color/colorAccentLight"/>
 
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
             android:id="@+id/stanjePotrosenoTextIP"
-            android:text="@string/UtrosakPreth" />
+            android:text="@string/UtrosakPreth"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:id="@+id/stanjePotrosenoText2IP" />
+            android:id="@+id/stanjePotrosenoText2IP"
+            android:textColor="@color/colorAccentLight"/>
 
         <TextView
             android:text="@string/ProsecnaPotrosnjaCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/customAvgText1" />
+            android:id="@+id/customAvgText1"
+            android:textColor="@color/colorAccent"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/customAvgText2" />
+            android:id="@+id/customAvgText2"
+            android:textColor="@color/colorAccentLight"/>
 
     </LinearLayout>
 </RelativeLayout>
