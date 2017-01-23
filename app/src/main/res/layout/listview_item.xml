@@ -62,7 +62,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:gravity="center"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorAccentLight"/>
 
         <TextView
             android:id="@+id/itemTotalPerLiter"
@@ -70,7 +71,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:gravity="center"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorAccentLight"/>
     </LinearLayout>
 
 </LinearLayout>
