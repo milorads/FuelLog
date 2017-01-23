@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
@@ -92,12 +93,12 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             }
         }
     }
+
+    private DatabaseHandler database;
+
     private void WriteReport(DatabaseModel model, int fuel, int prevFuel, long startMileage, long startDate)
     {
         // write new fuel state to sharedprefs
-        long sDateL = 0;
-        if(sharedpreferences.contains("Date")){
-            sDateL = sharedpreferences.getLong("Date", 0);}
         sharedpreferences.edit().putInt("Fuel", fuel).apply();
         String FILENAME = "Report"+Long.toString(model.get_date());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -105,13 +106,17 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         String textmsg = "Report for " + dateString + "\n\n";
         long range = model.get_km() - startMileage;
         long pastTime = model.get_date() - startDate;
-        Date sDate = new Date(sDateL);
-        Date mDate = new Date(model.get_date());
         long days = TimeUnit.MILLISECONDS.toDays(pastTime);
-        long s = TimeUnit.DAYS.convert(pastTime, TimeUnit.MILLISECONDS);
+        database = DatabaseHandler.getInstance(this);
+        List<DatabaseModel> lista = database.getAllRefills();
+        long utrosenoGorivo = 0;
+        for (DatabaseModel m:lista) {
 
+            utrosenoGorivo += m.get_lit();
+        }
+        final long avg = (utrosenoGorivo*100)/range;
         textmsg+="For the period of " + days + ", the range of: "+range+" was covered.\n";
-        textmsg+="Average consumption was: "+"";
+        textmsg+="Average consumption was: "+ Long.toString(avg);
 
         try {
             FileOutputStream fileout=openFileOutput(FILENAME+".txt", MODE_PRIVATE);
