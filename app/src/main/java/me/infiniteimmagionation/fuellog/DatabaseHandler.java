@@ -174,12 +174,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (litCursor.moveToNext());
         }
         long pPut = 0;
-        if (fKm == lKm){
-            if (startDate <=  gornjaGranica && startDate >= donjaGranica){
-                pPut = fKm - startMileage;
-            }
-            else{
-                pPut = fKm - lKm;}
+        if (startDate <=  gornjaGranica && startDate >= donjaGranica)
+        {
+            pPut = fKm - startMileage;
+        }
+        else
+        {
+            pPut = fKm - lKm;
         }
         final long predjenPut = pPut;
         final long utrosakGoriva = uG;

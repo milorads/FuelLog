@@ -95,18 +95,26 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private void WriteReport(DatabaseModel model, int fuel, int prevFuel, long startMileage, long startDate)
     {
         // write new fuel state to sharedprefs
+        long sDateL = 0;
+        if(sharedpreferences.contains("Date")){
+            sDateL = sharedpreferences.getLong("Date", 0);}
         sharedpreferences.edit().putInt("Fuel", fuel).apply();
         String FILENAME = "Report"+Long.toString(model.get_date());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(model.get_date()));
         String textmsg = "Report for " + dateString + "\n\n";
-        long range = startMileage - model.get_km();
-        long pastTime = startDate - model.get_date();
+        long range = model.get_km() - startMileage;
+        long pastTime = model.get_date() - startDate;
+        Date sDate = new Date(sDateL);
+        Date mDate = new Date(model.get_date());
         long days = TimeUnit.MILLISECONDS.toDays(pastTime);
-        textmsg+="For the period of " + days + ", the range of: "+range+" was covered.";
+        long s = TimeUnit.DAYS.convert(pastTime, TimeUnit.MILLISECONDS);
+
+        textmsg+="For the period of " + days + ", the range of: "+range+" was covered.\n";
+        textmsg+="Average consumption was: "+"";
 
         try {
-            FileOutputStream fileout=openFileOutput(FILENAME, MODE_PRIVATE);
+            FileOutputStream fileout=openFileOutput(FILENAME+".txt", MODE_PRIVATE);
             OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
             outputWriter.write(textmsg);
             outputWriter.close();
