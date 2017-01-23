@@ -21,6 +21,7 @@ public class LastNActivity extends AppCompatActivity {
         setContentView(R.layout.activity_last_n);
         TextView utrosak = (TextView)findViewById(R.id.stanjePotrosenoText2IP);
         TextView predjeno = (TextView)findViewById(R.id.stanjePredjenoText2IP);
+        TextView average = (TextView)findViewById(R.id.customAvgText2);
         Intent intent = getIntent();
         int period = intent.getIntExtra("spinner", 0);
         database = DatabaseHandler.getInstance(this);
@@ -33,7 +34,11 @@ public class LastNActivity extends AppCompatActivity {
         Map<String, String> map = database.getConsumptionPerPeriod(period, startMileage, date);
         String predjenPut = (String) map.get("put");
         String utrosakGoriva = (String) map.get("gorivo");
+        long predjenPutL = Long.parseLong(predjenPut);;
+        long utrosakGorivaL = Long.parseLong(utrosakGoriva);;
         utrosak.setText(utrosakGoriva);
         predjeno.setText(predjenPut);
+        long avg = (utrosakGorivaL*100)/predjenPutL;
+    average.setText(Long.toString(avg));
     }
 }

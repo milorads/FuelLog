@@ -42,5 +42,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/stanjePotrosenoText2IP" />
 
+        <TextView
+            android:text="@string/ProsecnaPotrosnjaCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/customAvgText1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/customAvgText2" />
+
     </LinearLayout>
 </RelativeLayout>

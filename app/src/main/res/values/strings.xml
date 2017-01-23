@@ -13,6 +13,7 @@
     <string name="Prikaz">Prikaz</string>
     <string name="IzlistajText">Prikaz prethodnog perioda</string>
     <string name="ProsecnaPotrosnja">Prosecna potrosnja od pocetka racunanja:</string>
+    <string name="ProsecnaPotrosnjaCustom">Prosecna potrosnja za izabrani period</string>
     <string-array name="perLiter_or_Total">
         <item>Per liter</item>
         <item>Total</item>
