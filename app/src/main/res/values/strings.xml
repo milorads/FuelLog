@@ -22,6 +22,8 @@
     <string name="Editor">Entered data editor</string>
     <string name="mileage_fuel_confirmation">Confirm mileage/fuel</string>
     <string name="warn">Warning</string>
+    <string name="err">Error</string>
+    <string name="succ">Success</string>
     <string name="ok">Ok</string>
     <string name="no">No</string>
     <string-array name="perLiter_or_Total">

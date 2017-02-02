@@ -2,7 +2,6 @@ package me.infiniteimmagionation.fuellog;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -26,6 +24,12 @@ public class EditActivity extends AppCompatActivity {
     Context context;
     ListView listView;
     List<DatabaseModel> modelList;
+    private EditText mi;
+    private EditText pr;
+    private EditText fl;
+    private Spinner sp;
+    private String tpl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,12 +100,6 @@ public class EditActivity extends AppCompatActivity {
         });
     }
 
-    private EditText mi;
-    private EditText pr;
-    private EditText fl;
-    private Spinner sp;
-    private String tpl;
-
     private void popupHandler(int modelPosition, View v)
     {
         DatabaseModel model = modelList.get(modelPosition);
@@ -116,7 +114,7 @@ public class EditActivity extends AppCompatActivity {
             sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
             tpl = sp.getSelectedItem().toString();
         }
-        catch (Exception e){Toast.makeText(EditActivity.this,"Error", Toast.LENGTH_SHORT).show(); return;}
+        catch (Exception e){Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show(); return;}
             try
         {
             fail = false;
@@ -127,7 +125,7 @@ public class EditActivity extends AppCompatActivity {
         catch (Exception e)
         {
             fail = true;
-            Toast.makeText(EditActivity.this,"Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show();
         }
         if(!fail)
         {
@@ -136,8 +134,8 @@ public class EditActivity extends AppCompatActivity {
             DatabaseModel newModel = new DatabaseModel(tpl, price, mileage, fuel);
             boolean a = database.editDatabaseEntry(id, newModel);
             if (a){
-            Toast.makeText(EditActivity.this,"Success", Toast.LENGTH_SHORT).show();}
-            else{Toast.makeText(EditActivity.this,"Error", Toast.LENGTH_SHORT).show();}
+            Toast.makeText(EditActivity.this,getResources().getString(R.string.succ), Toast.LENGTH_SHORT).show();}
+            else{Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show();}
         }
     }
 }
