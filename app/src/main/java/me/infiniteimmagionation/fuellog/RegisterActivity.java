@@ -70,10 +70,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void emptyDialogBuilder(){
         final Intent intent = new Intent(this, RegisterActivity.class);
         new AlertDialog.Builder(RegisterActivity.this)
-                .setTitle("Warning")
-                .setMessage("Mileage/Fuel must be a number and can not be empty")
+                .setTitle(getResources().getString(R.string.warn))
+                .setMessage(getResources().getString(R.string.fuel_mileage_warning))
                 .setCancelable(false)
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -105,10 +105,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     finish();
                     // info cant be empty
                     new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Warning")
-                            .setMessage("Mileage/Fuel must be a number and can not be empty")
+                            .setTitle(getResources().getString(R.string.warn))
+                            .setMessage(getResources().getString(R.string.fuel_mileage_warning))
                             .setCancelable(false)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     finish();
@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 finish();
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener()
+        }).setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)
@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         AlertDialog alert = alt.create();
-        alert.setTitle("Confirm mileage/fuel");
+        alert.setTitle(getResources().getString(R.string.mileage_fuel_confirmation));
         alert.show();
     }
 

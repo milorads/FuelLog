@@ -22,7 +22,7 @@ public class LastNActivity extends AppCompatActivity {
         setContentView(R.layout.activity_last_n);
         Initialize();
     }
-    
+
     private void Initialize(){
         TextView utrosak = (TextView)findViewById(R.id.stanjePotrosenoText2IP);
         TextView predjeno = (TextView)findViewById(R.id.stanjePredjenoText2IP);

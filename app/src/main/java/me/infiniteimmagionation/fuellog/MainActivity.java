@@ -108,8 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static String getTodayDate()
     {
         Calendar c = Calendar.getInstance();
-        System.out.println("Current time => " + c.getTime());
-
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(c.getTime());
         return  formattedDate;
