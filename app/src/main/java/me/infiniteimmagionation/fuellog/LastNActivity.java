@@ -15,10 +15,15 @@ public class LastNActivity extends AppCompatActivity {
     public static final String mypreference = "FirstRun";
     SharedPreferences sharedpreferences;
     DatabaseHandler database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_last_n);
+        Initialize();
+    }
+    
+    private void Initialize(){
         TextView utrosak = (TextView)findViewById(R.id.stanjePotrosenoText2IP);
         TextView predjeno = (TextView)findViewById(R.id.stanjePredjenoText2IP);
         TextView average = (TextView)findViewById(R.id.customAvgText2);
@@ -32,13 +37,13 @@ public class LastNActivity extends AppCompatActivity {
         if(sharedpreferences.contains("Date")){
             date = sharedpreferences.getLong("Date", 0);}
         Map<String, String> map = database.getConsumptionPerPeriod(period, startMileage, date);
-        String predjenPut = (String) map.get("put");
-        String utrosakGoriva = (String) map.get("gorivo");
+        String predjenPut = map.get("put");
+        String utrosakGoriva = map.get("gorivo");
         long predjenPutL = Long.parseLong(predjenPut);;
         long utrosakGorivaL = Long.parseLong(utrosakGoriva);;
         utrosak.setText(utrosakGoriva);
         predjeno.setText(predjenPut);
         long avg = (utrosakGorivaL*100)/predjenPutL;
-    average.setText(Long.toString(avg));
+        average.setText(Long.toString(avg));
     }
 }
