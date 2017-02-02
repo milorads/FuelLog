@@ -22,8 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
-     public DatabaseHandler database;
-//    public DatabaseHandler database = new DatabaseHandler(this);
+    public DatabaseHandler database;
 
 
     @Override
@@ -41,15 +40,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else
             {
-                Intent intent = new Intent(this, RegisterActivity.class);
-                startActivity(intent);
+                startRegisterIntent();
             }
         }
         else
         {
-            Intent intent = new Intent(this, RegisterActivity.class);
-            startActivity(intent);
+            startRegisterIntent();
         }
+    }
+
+    private void startRegisterIntent(){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void initFab()
@@ -123,12 +125,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         if(v.getId()==R.id.prikazButton)
         {
-            Intent intent = new Intent(this, LastNActivity.class);
-            Spinner s = (Spinner)findViewById(R.id.previousLookup);
-            intent.putExtra("spinner", checkSpinner(s));
-            startActivity(intent);
+            startLastNIntent();
         }
     }
+
+    private void startLastNIntent(){
+        Intent intent = new Intent(this, LastNActivity.class);
+        Spinner s = (Spinner)findViewById(R.id.previousLookup);
+        intent.putExtra("spinner", checkSpinner(s));
+        startActivity(intent);
+    }
+
     private int checkSpinner(Spinner s)
     {
         String text = s.getSelectedItem().toString();
