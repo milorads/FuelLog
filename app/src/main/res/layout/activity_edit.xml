@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView9"
             android:gravity="center"
-            android:textColor="@color/colorAccentDark"/>
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp" />
 
         <ListView
             android:layout_width="match_parent"

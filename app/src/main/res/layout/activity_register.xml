@@ -24,7 +24,8 @@
             tools:text="Please enter the following information"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textColor="@color/colorAccentDark" />
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -43,16 +44,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView4"
-                    android:layout_weight="1"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="169dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberSigned"
                     android:ems="10"
                     android:id="@+id/editText"
-                    android:layout_weight="1"
                     android:text="0" />
 
                 <TextView
@@ -74,15 +74,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView5"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberSigned"
                     android:ems="10"
                     android:id="@+id/editText2"
-                    android:layout_weight="1"
                     android:text="0" />
 
                 <TextView

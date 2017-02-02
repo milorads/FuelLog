@@ -26,14 +26,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/stanjeDanText"
             android:gravity="center"
-            android:textColor="@color/colorAccentDark" />
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/stanjeDanText2"
             android:gravity="center"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
 
         <TextView
             android:text="@string/Predjeno"
@@ -41,14 +43,16 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:id="@+id/stanjePredjenoText"
-            android:textColor="@color/colorAccentDark" />
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/stanjePredjenoText2"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -56,14 +60,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/stanjePotrosenoText"
             android:text="@string/Utrosak"
-            android:textColor="@color/colorAccentDark" />
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
             android:id="@+id/stanjePotrosenoText2"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
 
         <TextView
             android:text="@string/ProsecnaPotrosnja"
@@ -71,14 +77,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/averageText"
-            android:textColor="@color/colorAccentDark" />
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp" />
 
         <TextView
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/averageText2"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
 
         <View
             android:layout_width="fill_parent"
@@ -91,7 +99,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView8"
             android:gravity="center"
-            android:textColor="@color/colorAccentDark" />
+            android:textColor="@color/colorAccentDark"
+            android:textSize="18sp" />
 
         <Spinner
             android:layout_width="wrap_content"
