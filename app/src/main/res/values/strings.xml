@@ -1,4 +1,7 @@
 <resources>
+    <string name="fuel_prompt">Fuel set to zero. Are you sure?</string>
+    <string name="mileage_prompt">Mileage set to zero. Are you sure?</string>
+    <string name="fuel_mileage_prompt">Mileage and fuel are both set to zero. Are you sure?</string>
     <string name="app_name">Fuel Log</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_main">MainActivity</string>

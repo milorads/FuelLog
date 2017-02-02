@@ -15,7 +15,6 @@ import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String PREFS_NAME = "MyPrefsFile";
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
 
@@ -23,6 +22,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        addButtonListener();
+    }
+
+    private void addButtonListener(){
         Button saveDugme = (Button)findViewById(R.id.saveButton);
         saveDugme.setOnClickListener(this);
     }
@@ -31,7 +34,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         EditText mileage = (EditText)findViewById(R.id.editText);
         EditText fuelleft = (EditText)findViewById(R.id.editText2);
-
         if(v.getId()==R.id.saveButton)
         {
             int iMileage = 0;
@@ -42,41 +44,42 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 iFuel = Integer.parseInt(fuelleft.getText().toString());
                 if (iMileage<=0 && iFuel<=0)
                 {
-                    dialogBuilder("Mileage and fuel are both set to zero. Are you sure?");
+                    dialogBuilder(getResources().getString(R.string.fuel_mileage_prompt));
                 }
                 else if(iMileage<=0)
                 {
-                    dialogBuilder("Mileage set to zero. Are you sure?");
+                    dialogBuilder(getResources().getString(R.string.mileage_prompt));
                 }
                 else if(iFuel<=0)
                 {
-                    dialogBuilder("Fuel set to zero. Are you sure?");
+                    dialogBuilder(getResources().getString(R.string.fuel_prompt));
                 }
                 else
                 {
                         saveMileageFuel(iMileage, iFuel);
                         savePreference();
                 }
-//                saveMileageFuel(iMileage, iFuel);
-//                savePreference();
             }
             catch (Exception e)
             {
-                final Intent intent = new Intent(this, RegisterActivity.class);
-                new AlertDialog.Builder(RegisterActivity.this)
-                        .setTitle("Warning")
-                        .setMessage("Mileage/Fuel must be a number and can not be empty")
-                        .setCancelable(false)
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                                startActivity(intent);
-                            }
-                        }).show();
-
+                emptyDialogBuilder();
             }
         }
+    }
+
+    private void emptyDialogBuilder(){
+        final Intent intent = new Intent(this, RegisterActivity.class);
+        new AlertDialog.Builder(RegisterActivity.this)
+                .setTitle("Warning")
+                .setMessage("Mileage/Fuel must be a number and can not be empty")
+                .setCancelable(false)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        startActivity(intent);
+                    }
+                }).show();
     }
 
     private void dialogBuilder(String message)
