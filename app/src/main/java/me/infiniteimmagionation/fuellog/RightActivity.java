@@ -136,8 +136,12 @@ public class RightActivity extends Fragment implements View.OnClickListener{
             }
             if(!fail)
             {
+                long mil =0;
+                sharedpreferences = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+                if(sharedpreferences.contains("Mileage")){
+                    mil = sharedpreferences.getLong("Mileage", 0);}
                 DatabaseModel model = new DatabaseModel(tpl, System.currentTimeMillis(), price, mileage, fuel);
-                if(db.addRefill(model)){
+                if(db.addRefill(model, mil)){
                     // pravljenje report-a
                     WriteReport(model, fuel, fuelPrev, startMileage, startDate);
                     // vracanje u main

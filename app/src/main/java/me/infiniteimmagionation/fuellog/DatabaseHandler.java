@@ -21,6 +21,8 @@ import java.util.Map;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
+    SharedPreferences sharedpreferences;
+    public static final String mypreference = "FirstRun";
     // All Static variables
     // Singleton
     private static DatabaseHandler dbInstance;
@@ -80,7 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    boolean addRefill(DatabaseModel model) {
+    boolean addRefill(DatabaseModel model, long sharedPrefMileage) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -96,7 +98,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LIT, model.get_lit());
 
         DatabaseModel compareModel = getLastMileage();
-        if(compareModel.get_km() <= model.get_km()){
+        if(compareModel != null && compareModel.get_km() >= model.get_km()){
+            return false;
+        }
+        else if(compareModel == null && sharedPrefMileage >= model.get_km()){
             return false;
         }
         else{

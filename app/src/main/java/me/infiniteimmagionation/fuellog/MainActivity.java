@@ -116,8 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             utrosenoGorivo += m.get_lit();
         }
         stanjeT3.setText(Long.toString(utrosenoGorivo));
+        final long avg;
+        if(predjenPut ==0){avg = 0;}else {avg = (utrosenoGorivo*100)/predjenPut;}
 
-        final long avg = (utrosenoGorivo*100)/predjenPut;
         stanjeT4.setText(Long.toString(avg));
     }
 
