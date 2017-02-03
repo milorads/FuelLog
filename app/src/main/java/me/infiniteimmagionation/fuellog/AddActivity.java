@@ -24,6 +24,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private DatabaseHandler db = DatabaseHandler.getInstance(this);
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
+    private DatabaseHandler database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -98,8 +99,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             }
         }
     }
-
-    private DatabaseHandler database;
 
     private void WriteReport(DatabaseModel model, int fuel, int prevFuel, long startMileage, long startDate)
     {
