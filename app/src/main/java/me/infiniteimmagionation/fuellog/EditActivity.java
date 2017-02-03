@@ -34,6 +34,10 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        Initialize();
+    }
+
+    private void Initialize(){
         database = DatabaseHandler.getInstance(this);
         context = this;
 
@@ -53,7 +57,10 @@ public class EditActivity extends AppCompatActivity {
             modelList.add(m);
         }
         // ListView setOnItemClickListener function apply here.
+        listViewListenerInit();
+    }
 
+    private void listViewListenerInit(){
         listView.setOnItemClickListener(new OnItemClickListener()
         {
             @Override
@@ -78,23 +85,23 @@ public class EditActivity extends AppCompatActivity {
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the
                 // dialog layout
-                builder.setTitle("Editor");
+                builder.setTitle(getResources().getString(R.string.editor));
                 builder.setCancelable(false);
 //                builder.setIcon(R.drawable.galleryalart);
 
-                builder.setView(v).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                popupHandler(position, v);
-                            }}).setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                builder.setView(v).setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        popupHandler(position, v);
+                    }}).setNegativeButton(getResources().getString(R.string.canc), new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
-            builder.create();
-            builder.show();
+                builder.create();
+                builder.show();
 
             }
         });

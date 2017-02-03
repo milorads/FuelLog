@@ -21,6 +21,8 @@
     <string name="EnterInfo">Please enter the following information</string>
     <string name="Editor">Entered data editor</string>
     <string name="mileage_fuel_confirmation">Confirm mileage/fuel</string>
+    <string name="editor">Editor</string>
+    <string name="canc">Cancel</string>
     <string name="warn">Warning</string>
     <string name="err">Error</string>
     <string name="succ">Success</string>
