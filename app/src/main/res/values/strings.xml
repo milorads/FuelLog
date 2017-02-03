@@ -39,4 +39,11 @@
         <item>6 Months</item>
         <item>12 Months</item>
     </string-array>
+    <string name="report1">Report</string>
+    <string name="report2">Report for </string>
+    <string name="report3">For the period of </string>
+    <string name="report4">, the range of: </string>
+    <string name="report5"> was covered.</string>
+    <string name="report6">Average consumption was: </string>
+
 </resources>

@@ -29,10 +29,15 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        Initialize();
+    }
+
+    private void Initialize(){
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         Button saveDugme = (Button)findViewById(R.id.saveAddButton);
         saveDugme.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.saveAddButton)
@@ -71,10 +76,10 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             {
                 fail = true;
                 new AlertDialog.Builder(AddActivity.this)
-                        .setTitle("Warning")
-                        .setMessage("Mileage/Fuel/Price must be a number and can not be empty")
+                        .setTitle(getResources().getString(R.string.warn))
+                        .setMessage(getResources().getString(R.string.fuel_mileage_warning))
                         .setCancelable(false)
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
@@ -100,10 +105,10 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     {
         // write new fuel state to sharedprefs
         sharedpreferences.edit().putInt("Fuel", fuel).apply();
-        String FILENAME = "Report"+Long.toString(model.get_date());
+        String FILENAME = getResources().getString(R.string.report1)+Long.toString(model.get_date());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(model.get_date()));
-        String textmsg = "Report for " + dateString + "\n\n";
+        String textmsg = getResources().getString(R.string.report2) + dateString + "\n\n";
         long range = model.get_km() - startMileage;
         long pastTime = model.get_date() - startDate;
         long days = TimeUnit.MILLISECONDS.toDays(pastTime);
@@ -115,8 +120,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             utrosenoGorivo += m.get_lit();
         }
         final long avg = (utrosenoGorivo*100)/range;
-        textmsg+="For the period of " + days + ", the range of: "+range+" was covered.\n";
-        textmsg+="Average consumption was: "+ Long.toString(avg);
+        textmsg+=getResources().getString(R.string.report3) + days + getResources().getString(R.string.report4)+range+getResources().getString(R.string.report5)+"\n";
+        textmsg+=getResources().getString(R.string.report6)+ Long.toString(avg);
 
         try {
             FileOutputStream fileout=openFileOutput(FILENAME+".txt", MODE_PRIVATE);
