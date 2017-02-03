@@ -32,6 +32,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        onClickHandler(v);
+    }
+
+    private void onClickHandler(View v){
         EditText mileage = (EditText)findViewById(R.id.editText);
         EditText fuelleft = (EditText)findViewById(R.id.editText2);
         if(v.getId()==R.id.saveButton)
@@ -56,8 +60,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 else
                 {
-                        saveMileageFuel(iMileage, iFuel);
-                        savePreference();
+                    saveMileageFuel(iMileage, iFuel);
+                    savePreference();
                 }
             }
             catch (Exception e)

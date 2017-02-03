@@ -7,121 +7,126 @@
     android:fitsSystemWindows="true"
     tools:context="me.infiniteimmagionation.fuellog.MainActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1">
+        android:layout_height="match_parent">
 
-        <ImageView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/fuel_launcher"
-            android:id="@+id/imageView"
-            android:layout_weight="0.49" />
+            android:weightSum="1">
 
-        <TextView
-            android:text="@string/Stanje"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/stanjeDanText"
-            android:gravity="center"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="18sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/fuel_launcher"
+                android:id="@+id/imageView"
+                android:layout_weight="0.49" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/stanjeDanText2"
-            android:gravity="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            <TextView
+                android:text="@string/Stanje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stanjeDanText"
+                android:gravity="center"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="18sp" />
 
-        <TextView
-            android:text="@string/Predjeno"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:id="@+id/stanjePredjenoText"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stanjeDanText2"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/stanjePredjenoText2"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            <TextView
+                android:text="@string/Predjeno"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:id="@+id/stanjePredjenoText"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:id="@+id/stanjePotrosenoText"
-            android:text="@string/Utrosak"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/stanjePredjenoText2"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:id="@+id/stanjePotrosenoText2"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:id="@+id/stanjePotrosenoText"
+                android:text="@string/Utrosak"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="18sp" />
 
-        <TextView
-            android:text="@string/ProsecnaPotrosnja"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/averageText"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:id="@+id/stanjePotrosenoText2"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
 
-        <TextView
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/averageText2"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            <TextView
+                android:text="@string/ProsecnaPotrosnja"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/averageText"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="18sp" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="30dp">
-        </View>
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/averageText2"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
 
-        <TextView
-            android:text="@string/IzlistajText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView8"
-            android:gravity="center"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="18sp" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="30dp">
+            </View>
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/previousLookup"
-            android:entries="@array/previousLookup"
-            android:layout_gravity="center"/>
+            <TextView
+                android:text="@string/IzlistajText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                android:gravity="center"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="18sp" />
 
-        <Button
-            android:text="@string/Prikaz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/prikazButton"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/colorAccentLight"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/previousLookup"
+                android:entries="@array/previousLookup"
+                android:layout_gravity="center"/>
 
-    </LinearLayout>
+            <Button
+                android:text="@string/Prikaz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/prikazButton"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorAccentLight"/>
+
+        </LinearLayout>
+    </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
+        android:layout_width="179dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
