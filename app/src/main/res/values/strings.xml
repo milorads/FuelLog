@@ -3,6 +3,7 @@
     <string name="mileage_prompt">Mileage set to zero. Are you sure?</string>
     <string name="fuel_mileage_prompt">Mileage and fuel are both set to zero. Are you sure?</string>
     <string name="fuel_mileage_warning">Mileage/Fuel must be a number and can not be empty.</string>
+    <string name="mileage_higher">Mileage must be higher than the last entered.</string>
     <string name="app_name">Fuel Log</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_main">MainActivity</string>

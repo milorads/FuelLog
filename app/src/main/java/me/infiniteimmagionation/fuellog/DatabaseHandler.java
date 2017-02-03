@@ -80,7 +80,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    void addRefill(DatabaseModel model) {
+    boolean addRefill(DatabaseModel model) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -95,10 +95,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         values.put(KEY_LIT, model.get_lit());
 
+        DatabaseModel compareModel = getLastMileage();
+        if(compareModel.get_km() <= model.get_km()){
+            return false;
+        }
+        else{
+            // Inserting Row
+            db.insert(TABLE_REFILLS, null, values);
+            db.close(); // Closing database connection
+            return true;
+        }
 
-        // Inserting Row
-        db.insert(TABLE_REFILLS, null, values);
-        db.close(); // Closing database connection
+
     }
 
     public List<DatabaseModel> getAllRefills() {
@@ -120,6 +128,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // return contact list
         return refillList;
+    }
+
+    public DatabaseModel getRefillById(int id) {
+        DatabaseModel refill = null;
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + TABLE_REFILLS+" WHERE "+KEY_ID+"="+Integer.toString(id)+" LIMIT 1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+                refill = new DatabaseModel(cursor.getInt(0),cursor.getString(1), cursor.getLong(2), cursor.getFloat(3), cursor.getLong(4), cursor.getLong(5));
+                // Adding contact to list
+        }
+
+        // return contact list
+        return refill;
     }
 
     public DatabaseModel getLastMileage()
@@ -150,6 +176,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public boolean editDatabaseEntry(int id, DatabaseModel newModel)
     {
+        boolean out = false;
 //        String litQuery = "UPDATE "+TABLE_REFILLS+" SET "+KEY_TPL+"= '"+newModel.get_tpl()+"', "+KEY_CDOP+"= "+newModel.get_cdop();
 //        private static final String KEY_ID = "ID";// INT -
 //        private static final String KEY_TPL = "TPL";// STRING -
@@ -163,7 +190,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         args.put(KEY_CDOP, newModel.get_cdop());
         args.put(KEY_KM, newModel.get_km());
         args.put(KEY_LIT, newModel.get_lit());
-        return db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+        if(id>1){
+            DatabaseModel prevItem = getRefillById(id-1);
+            DatabaseModel nextItem = getRefillById(id+1);
+            if(nextItem == null){
+                return false;
+            }
+            else{
+                if(prevItem.get_km()<= newModel.get_km() && nextItem.get_km()>= newModel.get_km()){
+                    out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+                }
+            }
+        }
+        return out;
     }
 
     public Map<String,String> getConsumptionPerPeriod(int nOfDays, long startMileage, long startDate)

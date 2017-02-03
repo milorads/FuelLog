@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -90,12 +91,16 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             if(!fail)
             {
                 DatabaseModel model = new DatabaseModel(tpl, System.currentTimeMillis(), price, mileage, fuel);
-                db.addRefill(model);
-
-                // pravljenje report-a
-                WriteReport(model, fuel, fuelPrev, startMileage, startDate);
-                // vracanje u main
-                finish();
+                if(db.addRefill(model)){
+                    // pravljenje report-a
+                    WriteReport(model, fuel, fuelPrev, startMileage, startDate);
+                    // vracanje u main
+                    finish();
+                }
+                else{
+                    Toast.makeText(this, getResources().getString(R.string.mileage_higher), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         }
     }

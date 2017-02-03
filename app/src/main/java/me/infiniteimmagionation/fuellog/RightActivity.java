@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -136,12 +137,16 @@ public class RightActivity extends Fragment implements View.OnClickListener{
             if(!fail)
             {
                 DatabaseModel model = new DatabaseModel(tpl, System.currentTimeMillis(), price, mileage, fuel);
-                db.addRefill(model);
-
-                // pravljenje report-a
-                WriteReport(model, fuel, fuelPrev, startMileage, startDate);
-                // vracanje u main
-                getActivity().finish();
+                if(db.addRefill(model)){
+                    // pravljenje report-a
+                    WriteReport(model, fuel, fuelPrev, startMileage, startDate);
+                    // vracanje u main
+                    getActivity().finish();
+                }
+                else{
+                    Toast.makeText(getActivity(), getResources().getString(R.string.mileage_higher), Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                }
             }
         }
     }
