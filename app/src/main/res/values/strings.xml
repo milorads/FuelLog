@@ -6,11 +6,7 @@
     <string name="mileage_higher">Mileage must be higher than the last entered.</string>
     <string name="app_name">Fuel Log</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_list_and_settings">ListAndSettings</string>
-    <string name="title_activity_main_h">MainHActivity</string>
     <string name="Stanje">Fuel status for the following day</string>
-    <string name="StanjePreth">Fuel status for the chosen period</string>
     <string name="Predjeno">Mileage covered from the start</string>
     <string name="PredjenoPreth">Mileage covered for the chosen period</string>
     <string name="Utrosak">Fuel expenses from the start</string>

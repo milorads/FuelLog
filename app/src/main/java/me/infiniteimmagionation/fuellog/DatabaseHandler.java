@@ -110,8 +110,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.close(); // Closing database connection
             return true;
         }
-
-
     }
 
     public List<DatabaseModel> getAllRefills() {

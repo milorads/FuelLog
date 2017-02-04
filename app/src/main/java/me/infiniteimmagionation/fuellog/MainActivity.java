@@ -6,21 +6,15 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-
-import me.infiniteimmagionation.fuellog.fragments.AddFragment;
-import me.infiniteimmagionation.fuellog.fragments.EditFragment;
-import me.infiniteimmagionation.fuellog.fragments.ListNFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{//, AddFragment.OnFragmentInteractionListener, EditFragment.OnFragmentInteractionListener, ListNFragment.OnFragmentInteractionListener {
 
