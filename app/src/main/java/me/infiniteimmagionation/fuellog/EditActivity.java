@@ -2,6 +2,7 @@ package me.infiniteimmagionation.fuellog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import java.util.List;
 public class EditActivity extends AppCompatActivity {
 
     public DatabaseHandler database;
+    SharedPreferences sharedpreferences;
+    public static final String mypreference = "FirstRun";
     Context context;
     ListView listView;
     List<DatabaseModel> modelList;
@@ -113,6 +116,9 @@ public class EditActivity extends AppCompatActivity {
 
     private void popupHandler(int modelPosition, View v)
     {
+        long startMileage = 0;
+        if(sharedpreferences.contains("Mileage")){
+            startMileage = sharedpreferences.getLong("Mileage", 0);}
         DatabaseModel model = modelList.get(modelPosition);
         boolean fail;
         long mileage =0;
@@ -143,7 +149,7 @@ public class EditActivity extends AppCompatActivity {
             int id = model.get_id();
             //    public DatabaseModel(String totalOrPerLiter, float refillPrice, long km, long liters){
             DatabaseModel newModel = new DatabaseModel(tpl, price, mileage, fuel);
-            boolean a = database.editDatabaseEntry(id, newModel);
+            boolean a = database.editDatabaseEntry(id, newModel, startMileage);
             if (a){
             Toast.makeText(EditActivity.this,getResources().getString(R.string.succ), Toast.LENGTH_SHORT).show();}
             else{Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show();}

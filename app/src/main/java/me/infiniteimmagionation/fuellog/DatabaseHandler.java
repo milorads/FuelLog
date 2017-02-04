@@ -177,7 +177,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    public boolean editDatabaseEntry(int id, DatabaseModel newModel)
+    public boolean editDatabaseEntry(int id, DatabaseModel newModel, long startMileage)
     {
         boolean out = false;
 //        String litQuery = "UPDATE "+TABLE_REFILLS+" SET "+KEY_TPL+"= '"+newModel.get_tpl()+"', "+KEY_CDOP+"= "+newModel.get_cdop();
@@ -203,6 +203,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 if(prevItem.get_km()<= newModel.get_km() && nextItem.get_km()>= newModel.get_km()){
                     out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
                 }
+            }
+        }
+        else if(id == 1){
+            if(startMileage >= newModel.get_km()){
+                out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+            }
+            else{
+                return false;
             }
         }
         return out;
