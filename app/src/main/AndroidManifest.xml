@@ -22,11 +22,6 @@
             android:label="@string/title_activity_register"
             android:noHistory="true" />
         <activity android:name=".LastNActivity" />
-        <activity android:name=".DateViewActivity" />
-        <activity
-            android:name=".ListAndSettings"
-            android:label="@string/title_activity_list_and_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddActivity" />
         <activity android:name=".EditActivity"></activity>
     </application>

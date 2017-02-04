@@ -1,59 +1,98 @@
-package me.infiniteimmagionation.fuellog;
+package me.infiniteimmagionation.fuellog.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditActivity extends AppCompatActivity {
+import me.infiniteimmagionation.fuellog.DatabaseHandler;
+import me.infiniteimmagionation.fuellog.DatabaseModel;
+import me.infiniteimmagionation.fuellog.DatabaseModelAdapter;
+import me.infiniteimmagionation.fuellog.EditActivity;
+import me.infiniteimmagionation.fuellog.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link EditFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link EditFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class EditFragment extends Fragment {
 
     public DatabaseHandler database;
-    Context context;
+    public Context context;
     ListView listView;
     List<DatabaseModel> modelList;
-    private EditText mi;
-    private EditText pr;
-    private EditText fl;
-    private Spinner sp;
-    private String tpl;
+    View v;
+
+    private OnFragmentInteractionListener mListener;
+
+    public EditFragment() {
+        // Required empty public constructor
+    }
+
+    public static EditFragment newInstance() {
+        EditFragment fragment = new EditFragment();
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
-        Initialize();
     }
 
-    private void Initialize(){
-        database = DatabaseHandler.getInstance(this);
-        context = this;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.activity_edit, container, false);
+        database = DatabaseHandler.getInstance(context);
 
         modelList = new ArrayList<DatabaseModel>();
-        listView = (ListView) findViewById(R.id.listView);
-        InitializeList();
+        listView = (ListView) v.findViewById(R.id.listView);
+        Initialize();
+        return v;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+    public interface OnFragmentInteractionListener {
 
     }
 
-    private void InitializeList()
+    private void Initialize()
     {
         List<DatabaseModel> models = database.getAllRefills();
 
         ArrayList<DatabaseModel> arrayOfUsers = new ArrayList<DatabaseModel>();
-        DatabaseModelAdapter adapter = new DatabaseModelAdapter(this, arrayOfUsers);
-        final ListView listView = (ListView) findViewById(R.id.listView);
+        DatabaseModelAdapter adapter = new DatabaseModelAdapter(context, arrayOfUsers);
+        final ListView listView = (ListView) v.findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
         for (DatabaseModel m : models) {
@@ -61,11 +100,8 @@ public class EditActivity extends AppCompatActivity {
             modelList.add(m);
         }
         // ListView setOnItemClickListener function apply here.
-        listViewListenerInit();
-    }
 
-    private void listViewListenerInit(){
-        listView.setOnItemClickListener(new OnItemClickListener()
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -89,15 +125,16 @@ public class EditActivity extends AppCompatActivity {
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the
                 // dialog layout
-                builder.setTitle(getResources().getString(R.string.editor));
+                builder.setTitle("Editor");
                 builder.setCancelable(false);
 //                builder.setIcon(R.drawable.galleryalart);
 
-                builder.setView(v).setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                builder.setView(v).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         popupHandler(position, v);
-                    }}).setNegativeButton(getResources().getString(R.string.canc), new DialogInterface.OnClickListener()
+                        Initialize();
+                    }}).setNegativeButton("Cancel", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -110,6 +147,12 @@ public class EditActivity extends AppCompatActivity {
             }
         });
     }
+
+    private EditText mi;
+    private EditText pr;
+    private EditText fl;
+    private Spinner sp;
+    private String tpl;
 
     private void popupHandler(int modelPosition, View v)
     {
@@ -125,18 +168,19 @@ public class EditActivity extends AppCompatActivity {
             sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
             tpl = sp.getSelectedItem().toString();
         }
-        catch (Exception e){Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show(); return;}
-            try
+        catch (Exception e){
+//            Toast.makeText(context.this,"Error", Toast.LENGTH_SHORT).show(); return;}
+        try
         {
             fail = false;
             mileage = Integer.parseInt(mi.getText().toString());
             fuel = Integer.parseInt(fl.getText().toString());
             price = Float.parseFloat(pr.getText().toString());
         }
-        catch (Exception e)
+        catch (Exception ee)
         {
             fail = true;
-            Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(EditActivity.this,"Error", Toast.LENGTH_SHORT).show();
         }
         if(!fail)
         {
@@ -145,8 +189,11 @@ public class EditActivity extends AppCompatActivity {
             DatabaseModel newModel = new DatabaseModel(tpl, price, mileage, fuel);
             boolean a = database.editDatabaseEntry(id, newModel);
             if (a){
-            Toast.makeText(EditActivity.this,getResources().getString(R.string.succ), Toast.LENGTH_SHORT).show();}
-            else{Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show();}
+//                Toast.makeText(EditActivity.this,"Success", Toast.LENGTH_SHORT).show();
+                     }
+            else{
+//                    Toast.makeText(EditActivity.this,"Error", Toast.LENGTH_SHORT).show();
+                }}
         }
     }
 }
