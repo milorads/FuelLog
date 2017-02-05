@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -89,7 +90,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    getSupportFragmentManager().beginTransaction().add(R.id.activity_add, a).commit();
 //                }
 //                else{
-                startActivity(intent);
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    startActivity(intent);
+                }
+                else{
+
+                     //call fragment change
+                    RightActivity newFragment = new RightActivity();
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+                    transaction.replace(R.id.rightFragment, newFragment);
+                    transaction.addToBackStack(null);
+
+// Commit the transaction
+                    transaction.commit();
+                    getFragmentManager().executePendingTransactions();
+                }
+                //startActivity(intent);
 //                }
             }
         });
@@ -105,7 +125,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                }
 //                else
 //                {
-                startActivity(intent2);}
+                //startActivity(intent2);
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    startActivity(intent);
+                }
+                else{
+
+                    //call fragment change
+                    EditFragment newFragment = new EditFragment();
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+                    transaction.replace(R.id.rightFragment, newFragment);
+                    transaction.addToBackStack(null);
+
+// Commit the transaction
+                    transaction.commit();
+                    getFragmentManager().executePendingTransactions();
+                }
+
+            }
 //            }
         });
     }

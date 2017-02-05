@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,14 +117,26 @@ public class MainLandscapeFragment extends Fragment implements View.OnClickListe
         final Intent intent = new Intent(getActivity(), AddActivity.class);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(intent);
+               // startActivity(intent);
             }
         });
         FloatingActionButton myFab2 = (FloatingActionButton) v.findViewById(R.id.fab2);
         final Intent intent2 = new Intent(getActivity(), EditActivity.class);
         myFab2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(intent2);
+// Create fragment and give it an argument specifying the article it should show
+                EditFragment newFragment = new EditFragment();
+
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+                transaction.replace(R.id.rightFragment, newFragment);
+                transaction.addToBackStack(null);
+
+// Commit the transaction
+                transaction.commit();
+                //startActivity(intent2);
             }
         });
     }
@@ -173,7 +186,7 @@ public class MainLandscapeFragment extends Fragment implements View.OnClickListe
     {
         if(v.getId()==R.id.prikazButton)
         {
-            startLastNIntent();
+            //startLastNIntent();
         }
     }
 

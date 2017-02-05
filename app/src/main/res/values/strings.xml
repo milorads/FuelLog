@@ -42,4 +42,7 @@
     <string name="report4">, the range of: </string>
     <string name="report5"> was covered.</string>
     <string name="report6">Average consumption was: </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

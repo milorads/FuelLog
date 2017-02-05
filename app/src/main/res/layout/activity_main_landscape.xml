@@ -10,19 +10,35 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <fragment android:name="me.infiniteimmagionation.fuellog.MainLandscapeFragment"
-            android:id="@+id/article_fragment"
-            android:layout_weight="0.96"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            tools:layout="@layout/activity_main" />
+            android:layout_weight="0.96">
 
-        <FrameLayout
-            android:id="@+id/secondLandscapeFrag"
-            android:layout_width="0px"
+            <fragment android:name="me.infiniteimmagionation.fuellog.MainLandscapeFragment"
+                android:id="@+id/article_fragment"
+                android:layout_weight="0.96"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/activity_main" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?android:attr/detailsElementBackground" />
+            android:layout_weight="0.96">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.96"
+                android:id="@+id/rightFragment">
+
+            </FrameLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
