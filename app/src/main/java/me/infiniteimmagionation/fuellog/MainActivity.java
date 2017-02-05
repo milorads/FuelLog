@@ -83,65 +83,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final Intent intent = new Intent(this, AddActivity.class);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-//                {
-//                    AddFragment a = AddFragment.newInstance();
-//                    a.context=mainContext;
-//                    getSupportFragmentManager().beginTransaction().add(R.id.activity_add, a).commit();
-//                }
-//                else{
                 if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                     startActivity(intent);
                 }
                 else{
-
-                     //call fragment change
                     RightActivity newFragment = new RightActivity();
-
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack so the user can navigate back
                     transaction.replace(R.id.rightFragment, newFragment);
                     transaction.addToBackStack(null);
-
-// Commit the transaction
                     transaction.commit();
                     getFragmentManager().executePendingTransactions();
                 }
-                //startActivity(intent);
-//                }
             }
         });
         FloatingActionButton myFab2 = (FloatingActionButton) findViewById(R.id.fab2);
         final Intent intent2 = new Intent(this, EditActivity.class);
         myFab2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-//                {
-//                    EditFragment f = EditFragment.newInstance();
-//                    f.context = mainContext;
-//                    getSupportFragmentManager().beginTransaction().add(R.id.activity_add, f).commit();
-//                }
-//                else
-//                {
-                //startActivity(intent2);
                 if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                     startActivity(intent);
                 }
                 else{
-
-                    //call fragment change
                     EditFragment newFragment = new EditFragment();
-
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack so the user can navigate back
                     transaction.replace(R.id.rightFragment, newFragment);
                     transaction.addToBackStack(null);
-
-// Commit the transaction
                     transaction.commit();
                     getFragmentManager().executePendingTransactions();
                 }
@@ -203,7 +169,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         if(v.getId()==R.id.prikazButton)
         {
-            startLastNIntent();
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                startLastNIntent();
+            }
+            else{
+                LastNFragment newFragment = new LastNFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.rightFragment, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                getFragmentManager().executePendingTransactions();
+            }
+
         }
     }
 

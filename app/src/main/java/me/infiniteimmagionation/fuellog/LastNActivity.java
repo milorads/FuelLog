@@ -43,7 +43,9 @@ public class LastNActivity extends AppCompatActivity {
         long utrosakGorivaL = Long.parseLong(utrosakGoriva);;
         utrosak.setText(utrosakGoriva);
         predjeno.setText(predjenPut);
-        long avg = (utrosakGorivaL*100)/predjenPutL;
+        long avg = 0;
+        if(predjenPutL != 0){
+        avg = (utrosakGorivaL*100)/predjenPutL;}
         average.setText(Long.toString(avg));
     }
 }
