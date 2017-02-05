@@ -48,19 +48,18 @@ public class LastNFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.activity_last_n, container, false);
-
+        int spinnerChoice = getArguments().getInt("spinner");
         //todo
-        Initialize();
+        Initialize(spinnerChoice);
 
         return v;
     }
 
-    private void Initialize(){
+    private void Initialize(int spinnerChoice){
         TextView utrosak = (TextView)v.findViewById(R.id.stanjePotrosenoText2IP);
         TextView predjeno = (TextView)v.findViewById(R.id.stanjePredjenoText2IP);
         TextView average = (TextView)v.findViewById(R.id.customAvgText2);
-        Intent intent = getActivity().getIntent();
-        int period = intent.getIntExtra("spinner", 0);
+        int period = spinnerChoice;
         database = DatabaseHandler.getInstance(getActivity());
         long startMileage =0, date=0;
         sharedpreferences = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);

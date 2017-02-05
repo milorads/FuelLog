@@ -173,12 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startLastNIntent();
             }
             else{
-                LastNFragment newFragment = new LastNFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.rightFragment, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                getFragmentManager().executePendingTransactions();
+startLastNFragment();
             }
 
         }
@@ -189,6 +184,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Spinner s = (Spinner)findViewById(R.id.previousLookup);
         intent.putExtra("spinner", checkSpinner(s));
         startActivity(intent);
+    }
+
+    private void startLastNFragment(){
+        LastNFragment newFragment = new LastNFragment();
+        Bundle bundle = new Bundle();
+        Spinner s = (Spinner)findViewById(R.id.previousLookup);
+        bundle.putInt("spinner", checkSpinner(s));
+        // set Fragmentclass Arguments
+        newFragment.setArguments(bundle);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.rightFragment, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        getFragmentManager().executePendingTransactions();
     }
 
     private int checkSpinner(Spinner s)
