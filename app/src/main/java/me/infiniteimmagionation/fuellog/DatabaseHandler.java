@@ -214,12 +214,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
         }
         else if(id == 1){
-            if(startMileage >= newModel.get_km()){
-                out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+            DatabaseModel nextItem = getRefillById(id+1);
+            if(nextItem == null){
+                if(startMileage <= newModel.get_km()){
+                    out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+                }
             }
             else{
-                return false;
+                if(startMileage<= newModel.get_km() && nextItem.get_km()>= newModel.get_km()){
+                    out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+                }
             }
+//            if(startMileage <= newModel.get_km()){
+//                out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+//            }
+//            else{
+//                return false;
+//            }
         }
         return out;
     }

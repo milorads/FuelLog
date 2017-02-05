@@ -186,6 +186,7 @@ public class EditFragment extends Fragment {
                 Toast.makeText(context,getResources().getString(R.string.succ), Toast.LENGTH_SHORT).show();}
             else{Toast.makeText(context,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show();}
         }
+        InitializeList();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
