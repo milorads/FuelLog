@@ -196,13 +196,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(id>1){
             DatabaseModel prevItem = getRefillById(id-1);
             DatabaseModel nextItem = getRefillById(id+1);
-            if(nextItem == null){
+            if(prevItem == null){
                 return false;
             }
             else{
-                if(prevItem.get_km()<= newModel.get_km() && nextItem.get_km()>= newModel.get_km()){
-                    out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+                if(nextItem == null){
+                    if(prevItem.get_km()<= newModel.get_km()){
+                        out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+                    }
                 }
+                else{
+                    if(prevItem.get_km()<= newModel.get_km() && nextItem.get_km()>= newModel.get_km()){
+                        out= db.update(TABLE_REFILLS, args, KEY_ID + "=" + id, null) > 0;
+                    }
+                }
+
             }
         }
         else if(id == 1){

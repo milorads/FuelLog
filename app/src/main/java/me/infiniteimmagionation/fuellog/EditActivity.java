@@ -43,7 +43,7 @@ public class EditActivity extends AppCompatActivity {
     private void Initialize(){
         database = DatabaseHandler.getInstance(this);
         context = this;
-
+        sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         modelList = new ArrayList<DatabaseModel>();
         listView = (ListView) findViewById(R.id.listView);
         InitializeList();

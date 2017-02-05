@@ -73,8 +73,7 @@ public class EditFragment extends Fragment {
     private void Initialize(){
         context = getActivity();
         database = DatabaseHandler.getInstance(context);
-
-
+        sharedpreferences = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         modelList = new ArrayList<DatabaseModel>();
         listView = (ListView) v.findViewById(R.id.listView);
         InitializeList();
@@ -146,7 +145,7 @@ public class EditFragment extends Fragment {
         });
     }
 
-    private void popupHandler(int modelPosition, View v)
+    private void popupHandler(int modelPosition, View temp)
     {
         long startMileage = 0;
         if(sharedpreferences.contains("Mileage")){
@@ -157,10 +156,10 @@ public class EditFragment extends Fragment {
         int fuel =0;
         float price = 0;
         try {
-            mi = (EditText) v.findViewById(R.id.editMileageText);
-            pr = (EditText) v.findViewById(R.id.editPriceText);
-            fl = (EditText) v.findViewById(R.id.editFuelText);
-            sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
+            mi = (EditText) temp.findViewById(R.id.editMileageText);
+            pr = (EditText) temp.findViewById(R.id.editPriceText);
+            fl = (EditText) temp.findViewById(R.id.editFuelText);
+            sp = (Spinner) temp.findViewById(R.id.editTPLSpinner);
             tpl = sp.getSelectedItem().toString();
         }
         catch (Exception e){

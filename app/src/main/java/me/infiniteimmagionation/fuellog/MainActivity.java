@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         myFab2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    startActivity(intent);
+                    startActivity(intent2);
                 }
                 else{
                     EditFragment newFragment = new EditFragment();
