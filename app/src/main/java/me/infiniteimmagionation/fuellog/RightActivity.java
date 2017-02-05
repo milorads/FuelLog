@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileOutputStream;
@@ -47,14 +48,21 @@ public class RightActivity extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
     }
 
+    View v;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_right, container, false);
+        v = inflater.inflate(R.layout.fragment_right, container, false);
 
-        Button saveDugme = (Button) v.findViewById(R.id.saveAddButton);
-        saveDugme.setOnClickListener(this);
+        Initialize();
 
         return v;
+    }
+
+    void Initialize(){
+        sharedpreferences = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+        Button saveDugme = (Button)v.findViewById(R.id.saveAddButton);
+        saveDugme.setOnClickListener(this);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -87,8 +95,8 @@ public class RightActivity extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
-        if(v.getId()==R.id.saveAddButton)
+    public void onClick(View temp) {
+        if(temp.getId()==R.id.saveAddButton)
         {
             boolean fail;
             // get status trenutni iz shared i interne memorije
@@ -145,14 +153,20 @@ public class RightActivity extends Fragment implements View.OnClickListener{
                     // pravljenje report-a
                     WriteReport(model, fuel, fuelPrev, startMileage, startDate);
                     // vracanje u main
-                    getActivity().finish();
+                    clearText(mi);clearText(pr);clearText(fl);
+                    Toast.makeText(getActivity(), getResources().getString(R.string.succ), Toast.LENGTH_SHORT).show();
+                    //getActivity().finish();
                 }
                 else{
                     Toast.makeText(getActivity(), getResources().getString(R.string.mileage_higher), Toast.LENGTH_SHORT).show();
-                    getActivity().finish();
+                    //getActivity().finish();
                 }
             }
         }
+    }
+
+    private void clearText(TextView txt){
+        txt.setText("0");
     }
 
     private void WriteReport(DatabaseModel model, int fuel, int prevFuel, long startMileage, long startDate)
