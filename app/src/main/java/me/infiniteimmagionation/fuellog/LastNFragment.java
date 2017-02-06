@@ -48,7 +48,9 @@ public class LastNFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.activity_last_n, container, false);
-        int spinnerChoice = getArguments().getInt("spinner");
+        int spinnerChoice = 0;
+        if(getArguments() != null){
+             spinnerChoice = getArguments().getInt("spinner");}
         //todo
         Initialize(spinnerChoice);
 

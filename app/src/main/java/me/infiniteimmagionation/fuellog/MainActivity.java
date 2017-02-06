@@ -27,14 +27,75 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public DatabaseHandler database;
 
     @Override
-    protected void onResume()
+    protected void onStart()
     {
-        super.onResume();
+        super.onStart();
         if(findViewById(R.id.prikazButton) != null){
-                    InitializeItems();
-        initFab();
-        }
 
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            }
+            else{
+                if(checkForIntents()){
+                    fillFragment();
+                }
+            }
+        }
+        InitializeItems();
+        initFab();
+
+    }
+
+    private void fillFragment(){
+        String fromClass = "";
+        Intent i = getIntent();
+        if(i != null){
+            Bundle e = i.getExtras();
+            if(e!=null){
+                fromClass  = i.getStringExtra("class");
+            }
+        }
+        switch(fromClass){
+            case "LastN":
+                LastNFragment newFragment = new LastNFragment();
+                Bundle bundle = new Bundle();
+                Spinner s = (Spinner)findViewById(R.id.previousLookup);
+                bundle.putInt("spinner", checkSpinner(s));
+                newFragment.setArguments(bundle);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.rightFragment, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                getFragmentManager().executePendingTransactions();
+                break;
+            case "Edit":
+                EditFragment newFragment2 = new EditFragment();
+                FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                transaction2.replace(R.id.rightFragment, newFragment2);
+                transaction2.addToBackStack(null);
+                transaction2.commit();
+                getFragmentManager().executePendingTransactions();
+                break;
+            case "Add":
+                RightActivity newFragment3 = new RightActivity();
+                FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
+                transaction3.replace(R.id.rightFragment, newFragment3);
+                transaction3.addToBackStack(null);
+                transaction3.commit();
+                getFragmentManager().executePendingTransactions();
+                break;
+        }
+    }
+
+    private boolean checkForIntents(){
+        boolean out = false;
+        Intent i = getIntent();
+        if(i != null){
+            Bundle e = i.getExtras();
+            if(e!=null){
+                out = true;
+            }
+        }
+        return out;
     }
 
     @Override

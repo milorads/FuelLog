@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
-
+//
     private DatabaseHandler db = DatabaseHandler.getInstance(this);
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
@@ -31,8 +32,15 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-        Initialize();
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_add);
+            Initialize();
+        }
+        else{
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("class", RotationHandler.getCurrentClass().toString());
+            startActivity(i);
+        }
     }
 
     private void Initialize(){
@@ -174,5 +182,16 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            setContentView(R.layout.activity_add);
+        }
+        else{
+            //setContentView(R.layout.activity_main_landscape);
+        }
     }
 }

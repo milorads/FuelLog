@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
-
+//
     public DatabaseHandler database;
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
@@ -37,8 +38,15 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
-        Initialize();
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_edit);
+            Initialize();
+        }
+        else{
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("class", RotationHandler.getCurrentClass().toString());
+            startActivity(i);
+        }
     }
 
     private void Initialize(){
@@ -226,6 +234,17 @@ public class EditActivity extends AppCompatActivity {
             if (a){
             Toast.makeText(EditActivity.this,getResources().getString(R.string.succ), Toast.LENGTH_SHORT).show();}
             else{Toast.makeText(EditActivity.this,getResources().getString(R.string.err), Toast.LENGTH_SHORT).show();}
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            setContentView(R.layout.activity_edit);
+        }
+        else{
+            //setContentView(R.layout.activity_main_landscape);
         }
     }
 }

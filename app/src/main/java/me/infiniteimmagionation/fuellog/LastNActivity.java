@@ -3,6 +3,7 @@ package me.infiniteimmagionation.fuellog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import java.util.Map;
 
 public class LastNActivity extends AppCompatActivity {
-
+//
     // Shared preference variable
     public static final String mypreference = "FirstRun";
     SharedPreferences sharedpreferences;
@@ -19,8 +20,16 @@ public class LastNActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_last_n);
-        Initialize();
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_last_n);
+            Initialize();
+        }
+        else{
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("class", RotationHandler.getCurrentClass().toString());
+            startActivity(i);
+        }
+
     }
 
     private void Initialize(){
@@ -50,5 +59,18 @@ public class LastNActivity extends AppCompatActivity {
         if(predjenPutL != 0){
         avg = (utrosakGorivaL*100)/predjenPutL;}
         average.setText(Long.toString(avg));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            setContentView(R.layout.activity_last_n);
+        }
+        else{
+            //setContentView(R.layout.activity_main_landscape);
+            Intent i = new Intent(this, MainLandscapeFragment.class);
+            startActivity(i);
+        }
     }
 }
