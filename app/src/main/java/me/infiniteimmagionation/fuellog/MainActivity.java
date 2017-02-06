@@ -8,16 +8,19 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import me.infiniteimmagionation.fuellog.RotationHandler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{//, AddFragment.OnFragmentInteractionListener, EditFragment.OnFragmentInteractionListener, ListNFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, EditFragment.OnFragmentInteractionListener{//, AddFragment.OnFragmentInteractionListener, EditFragment.OnFragmentInteractionListener, ListNFragment.OnFragmentInteractionListener {
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
@@ -65,7 +68,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
         if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            setContentView(R.layout.activity_main);
+//            RotationHandler.classOption e = RotationHandler.getCurrentClass();
+//            switch(e)
+//            {
+//                case Add:
+//                    //
+//                    Intent i1 = new Intent(this, AddActivity.class);
+//                    startActivity(i1);
+//                    break;
+//                case Edit:
+//                    //
+//                    Intent i2 = new Intent(this, EditActivity.class);
+//                    startActivity(i2);
+//                    break;
+//                case LastN:
+//                    Intent i3 = new Intent(this, LastNActivity.class);
+//                    startActivity(i3);
+//                    //
+//                    break;
+//                case Main:
+//                    //
+                    setContentView(R.layout.activity_main);
+//                    break;
+//            }
         }
         else{
             setContentView(R.layout.activity_main_landscape);
@@ -119,6 +144,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void InitializeItems()
     {
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.Main);
+
         Button prikazButton = (Button) findViewById(R.id.prikazButton);
         prikazButton.setOnClickListener(this);
         TextView stanjeT1 = (TextView)findViewById(R.id.stanjeDanText2);
@@ -222,5 +250,13 @@ startLastNFragment();
                 break;
         }
         return broj;
+    }
+
+    @Override
+    public void clickedPostition(int i) {
+            Intent intent = new Intent(this, EditActivity.class);
+        intent.putExtra("chosenEdit", i);
+            startActivity(intent);
+
     }
 }

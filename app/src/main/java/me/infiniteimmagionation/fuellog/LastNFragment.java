@@ -56,6 +56,9 @@ public class LastNFragment extends Fragment {
     }
 
     private void Initialize(int spinnerChoice){
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.LastN);
+
         TextView utrosak = (TextView)v.findViewById(R.id.stanjePotrosenoText2IP);
         TextView predjeno = (TextView)v.findViewById(R.id.stanjePredjenoText2IP);
         TextView average = (TextView)v.findViewById(R.id.customAvgText2);

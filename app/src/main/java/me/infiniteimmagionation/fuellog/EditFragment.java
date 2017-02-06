@@ -71,6 +71,9 @@ public class EditFragment extends Fragment {
     }
 
     private void Initialize(){
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.Edit);
+
         context = getActivity();
         database = DatabaseHandler.getInstance(context);
         sharedpreferences = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
@@ -97,6 +100,8 @@ public class EditFragment extends Fragment {
         listViewListenerInit();
     }
 
+    private int tbsPosition = -1;
+
     private void listViewListenerInit(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -104,7 +109,7 @@ public class EditFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     final int position, long id) {
                 //
-
+                tbsPosition=position;
 //                Toast.makeText(EditActivity.this, modelList.get(position).get_tpl(), Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 // Get the layout inflater
@@ -189,11 +194,7 @@ public class EditFragment extends Fragment {
         InitializeList();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -202,19 +203,20 @@ public class EditFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
     public void onDetach() {
+        mListener.clickedPostition(tbsPosition);
         super.onDetach();
         mListener = null;
     }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        public void clickedPostition(int i);
     }
 }

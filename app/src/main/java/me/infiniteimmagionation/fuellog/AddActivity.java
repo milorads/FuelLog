@@ -35,6 +35,10 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void Initialize(){
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.Add);
+
+
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         Button saveDugme = (Button)findViewById(R.id.saveAddButton);
         saveDugme.setOnClickListener(this);

@@ -24,6 +24,9 @@ public class LastNActivity extends AppCompatActivity {
     }
 
     private void Initialize(){
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.LastN);
+
         TextView utrosak = (TextView)findViewById(R.id.stanjePotrosenoText2IP);
         TextView predjeno = (TextView)findViewById(R.id.stanjePredjenoText2IP);
         TextView average = (TextView)findViewById(R.id.customAvgText2);

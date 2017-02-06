@@ -143,6 +143,9 @@ public class MainLandscapeFragment extends Fragment implements View.OnClickListe
 
     private void InitializeItems()
     {
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.Main);
+
         Button prikazButton = (Button) v.findViewById(R.id.prikazButton);
         prikazButton.setOnClickListener(this);
         TextView stanjeT1 = (TextView)v.findViewById(R.id.stanjeDanText2);

@@ -2,6 +2,7 @@ package me.infiniteimmagionation.fuellog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,10 @@ public class EditActivity extends AppCompatActivity {
     }
 
     private void Initialize(){
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.Edit);
+
+
         database = DatabaseHandler.getInstance(this);
         context = this;
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
@@ -63,6 +68,7 @@ public class EditActivity extends AppCompatActivity {
             adapter.add(m);
             modelList.add(m);
         }
+        initializePopupIfFromIntent();
         // ListView setOnItemClickListener function apply here.
         listViewListenerInit();
     }
@@ -110,9 +116,50 @@ public class EditActivity extends AppCompatActivity {
                 });
                 builder.create();
                 builder.show();
-
             }
         });
+    }
+
+    private void initializePopupIfFromIntent(){
+      Intent intent = getIntent();
+        if(intent!=null){
+            final int i = intent.getIntExtra("chosenEdit", 0);
+            if(i != -1){
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            // Get the layout inflater
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View v = inflater.inflate(R.layout.edit_database_item, null);
+            mi = (EditText) v.findViewById(R.id.editMileageText);
+            pr = (EditText) v.findViewById(R.id.editPriceText);
+            fl = (EditText) v.findViewById(R.id.editFuelText);
+            sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
+            mi.setText(Long.toString(modelList.get(i).get_km()));
+            pr.setText(Float.toString(modelList.get(i).get_cdop()));
+            fl.setText(Long.toString(modelList.get(i).get_lit()));
+            if (modelList.get(i).get_tpl().equals("Total")){
+                sp.setSelection(1);}
+            else{sp.setSelection(0);}
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the
+            // dialog layout
+            builder.setTitle(getResources().getString(R.string.editor));
+            builder.setCancelable(false);
+//                builder.setIcon(R.drawable.galleryalart);
+
+            builder.setView(v).setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    popupHandler(i, v);
+                }}).setNegativeButton(getResources().getString(R.string.canc), new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            builder.create();
+            builder.show();
+        }}
     }
 
     private void popupHandler(int modelPosition, View v)

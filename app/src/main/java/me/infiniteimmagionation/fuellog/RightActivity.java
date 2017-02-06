@@ -60,6 +60,10 @@ public class RightActivity extends Fragment implements View.OnClickListener{
     }
 
     void Initialize(){
+        RotationHandler.getInstance();
+        RotationHandler.setClass(RotationHandler.classOption.Add);
+
+
         sharedpreferences = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         Button saveDugme = (Button)v.findViewById(R.id.saveAddButton);
         saveDugme.setOnClickListener(this);
