@@ -124,6 +124,19 @@ public class EditActivity extends AppCompatActivity {
       Intent intent = getIntent();
         if(intent!=null){
             final int i = intent.getIntExtra("chosenEdit", 0);
+            long mileageFromIntent =0;
+            int fuelFromIntent =0;
+            float priceFromIntent = 0;
+            String tplFromIntent ="";
+            boolean intentSucc = false;
+            //long mileage, int fuel, float price, String totalOrPerLiter
+            if(intent.getExtras().containsKey("chosenMileage")){
+                mileageFromIntent = intent.getLongExtra("chosenMileage", 0);
+                fuelFromIntent = intent.getIntExtra("chosenMileage", 0);
+                priceFromIntent = intent.getFloatExtra("chosenPrice", 0);
+                tplFromIntent = intent.getStringExtra("chosenTPL");
+                intentSucc = true;
+            }
             if(i != -1){
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             // Get the layout inflater
@@ -133,12 +146,23 @@ public class EditActivity extends AppCompatActivity {
             pr = (EditText) v.findViewById(R.id.editPriceText);
             fl = (EditText) v.findViewById(R.id.editFuelText);
             sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
-            mi.setText(Long.toString(modelList.get(i).get_km()));
-            pr.setText(Float.toString(modelList.get(i).get_cdop()));
-            fl.setText(Long.toString(modelList.get(i).get_lit()));
-            if (modelList.get(i).get_tpl().equals("Total")){
-                sp.setSelection(1);}
-            else{sp.setSelection(0);}
+                if(intentSucc){
+                    mi.setText(Long.toString(mileageFromIntent));
+                    pr.setText(Float.toString(priceFromIntent));
+                    fl.setText(Long.toString(fuelFromIntent));
+                    if (tplFromIntent.equals("Total")){
+                        sp.setSelection(1);}
+                    else{sp.setSelection(0);}
+                }
+                else{
+                    mi.setText(Long.toString(modelList.get(i).get_km()));
+                    pr.setText(Float.toString(modelList.get(i).get_cdop()));
+                    fl.setText(Long.toString(modelList.get(i).get_lit()));
+                    if (modelList.get(i).get_tpl().equals("Total")){
+                        sp.setSelection(1);}
+                    else{sp.setSelection(0);}
+                }
+
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the
             // dialog layout

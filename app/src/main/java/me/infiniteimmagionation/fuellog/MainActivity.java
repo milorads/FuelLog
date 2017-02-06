@@ -253,9 +253,15 @@ startLastNFragment();
     }
 
     @Override
-    public void clickedPostition(int i) {
+    public void clickedPostition(int i, long mileage, int fuel, float price, String totalOrPerLiter) {
             Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra("chosenEdit", i);
+        if(mileage != 0 && fuel != 0 && price != 0 && !totalOrPerLiter.equals("")){
+            intent.putExtra("chosenMileage", mileage);
+            intent.putExtra("chosenFuel", fuel);
+            intent.putExtra("chosenPrice", price);
+            intent.putExtra("chosenTPL", totalOrPerLiter);
+        }
             startActivity(intent);
 
     }

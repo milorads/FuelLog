@@ -101,6 +101,7 @@ public class EditFragment extends Fragment {
     }
 
     private int tbsPosition = -1;
+    View classView;
 
     private void listViewListenerInit(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -114,11 +115,11 @@ public class EditFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 // Get the layout inflater
                 LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View v = inflater.inflate(R.layout.edit_database_item, null);
-                mi = (EditText) v.findViewById(R.id.editMileageText);
-                pr = (EditText) v.findViewById(R.id.editPriceText);
-                fl = (EditText) v.findViewById(R.id.editFuelText);
-                sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
+                classView = inflater.inflate(R.layout.edit_database_item, null);
+                mi = (EditText) classView.findViewById(R.id.editMileageText);
+                pr = (EditText) classView.findViewById(R.id.editPriceText);
+                fl = (EditText) classView.findViewById(R.id.editFuelText);
+                sp = (Spinner) classView.findViewById(R.id.editTPLSpinner);
                 mi.setText(Long.toString(modelList.get(position).get_km()));
                 pr.setText(Float.toString(modelList.get(position).get_cdop()));
                 fl.setText(Long.toString(modelList.get(position).get_lit()));
@@ -132,10 +133,10 @@ public class EditFragment extends Fragment {
                 builder.setCancelable(false);
 //                builder.setIcon(R.drawable.galleryalart);
 
-                builder.setView(v).setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                builder.setView(classView).setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        popupHandler(position, v);
+                        popupHandler(position, classView);
                     }}).setNegativeButton(getResources().getString(R.string.canc), new DialogInterface.OnClickListener()
                 {
                     @Override
@@ -210,13 +211,34 @@ public class EditFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        mListener.clickedPostition(tbsPosition);
+        long mlg =0;
+        int fuel =0;
+        float price = 0;
+        //tpl
+        try {
+            mi = (EditText) classView.findViewById(R.id.editMileageText);
+            pr = (EditText) classView.findViewById(R.id.editPriceText);
+            fl = (EditText) classView.findViewById(R.id.editFuelText);
+            sp = (Spinner) classView.findViewById(R.id.editTPLSpinner);
+            mlg = Integer.parseInt(mi.getText().toString());
+            fuel = Integer.parseInt(fl.getText().toString());
+            price = Float.parseFloat(pr.getText().toString());
+            tpl = sp.getSelectedItem().toString();
+        }
+        catch (Exception e){
+
+        }
+        if(tpl != null){
+        mListener.clickedPostition(tbsPosition, mlg, fuel, price, tpl);}
+        else{
+            mListener.clickedPostition(tbsPosition, mlg, fuel, price, "");
+        }
         super.onDetach();
         mListener = null;
     }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void clickedPostition(int i);
+        public void clickedPostition(int i, long mileage, int fuel, float price, String totalOrPerLiter);
     }
 }
