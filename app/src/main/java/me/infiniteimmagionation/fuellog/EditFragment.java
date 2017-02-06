@@ -239,6 +239,6 @@ public class EditFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void clickedPostition(int i, long mileage, int fuel, float price, String totalOrPerLiter);
+        void clickedPostition(int i, long mileage, int fuel, float price, String totalOrPerLiter);
     }
 }

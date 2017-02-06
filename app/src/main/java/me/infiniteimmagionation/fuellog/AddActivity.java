@@ -2,6 +2,7 @@ package me.infiniteimmagionation.fuellog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
@@ -37,7 +38,36 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private void Initialize(){
         RotationHandler.getInstance();
         RotationHandler.setClass(RotationHandler.classOption.Add);
-
+        Intent intent = getIntent();
+        long mileageFromIntent =0;
+        int fuelFromIntent =0;
+        float priceFromIntent = 0;
+        String tplFromIntent ="";
+        boolean intentSucc = false;
+        Bundle a = intent.getExtras();
+        if(intent!=null && a !=null){
+        EditText mi = (EditText)findViewById(R.id.mileageText);
+        EditText pr = (EditText)findViewById(R.id.priceText);
+        EditText fl = (EditText)findViewById(R.id.fuelText);
+        Spinner sp = (Spinner)findViewById(R.id.perLiterTotal);
+        //String tpl = sp.getSelectedItem().toString();
+            //long mileage, int fuel, float price, String totalOrPerLiter
+            if(intent.getExtras().containsKey("chosenMileage")){
+                mileageFromIntent = intent.getLongExtra("chosenMileage", 0);
+                fuelFromIntent = intent.getIntExtra("chosenMileage", 0);
+                priceFromIntent = intent.getFloatExtra("chosenPrice", 0);
+                tplFromIntent = intent.getStringExtra("chosenTPL");
+                intentSucc = true;
+            }
+            if(intentSucc){
+                mi.setText(Long.toString(mileageFromIntent));
+                pr.setText(Float.toString(priceFromIntent));
+                fl.setText(Long.toString(fuelFromIntent));
+                if (tplFromIntent.equals("Total")){
+                    sp.setSelection(1);}
+                else{sp.setSelection(0);}
+            }
+        }
 
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         Button saveDugme = (Button)findViewById(R.id.saveAddButton);

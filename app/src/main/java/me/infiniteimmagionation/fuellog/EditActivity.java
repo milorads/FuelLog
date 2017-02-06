@@ -122,7 +122,8 @@ public class EditActivity extends AppCompatActivity {
 
     private void initializePopupIfFromIntent(){
       Intent intent = getIntent();
-        if(intent!=null){
+        Bundle a = intent.getExtras();
+        if(intent!=null && a !=null){
             final int i = intent.getIntExtra("chosenEdit", 0);
             long mileageFromIntent =0;
             int fuelFromIntent =0;

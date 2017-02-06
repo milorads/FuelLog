@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, EditFragment.OnFragmentInteractionListener{//, AddFragment.OnFragmentInteractionListener, EditFragment.OnFragmentInteractionListener, ListNFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, EditFragment.OnFragmentInteractionListener, RightActivity.OnFragmentInteractionListener{//, AddFragment.OnFragmentInteractionListener, EditFragment.OnFragmentInteractionListener, ListNFragment.OnFragmentInteractionListener {
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "FirstRun";
@@ -30,8 +30,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume()
     {
         super.onResume();
-        InitializeItems();
+        if(findViewById(R.id.prikazButton) != null){
+                    InitializeItems();
         initFab();
+        }
+
     }
 
     @Override
@@ -46,12 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                     setContentView(R.layout.activity_main);
-                    InitializeItems();
-                    initFab();
                 }
                 else{
                     setContentView(R.layout.activity_main_landscape);
                 }
+                InitializeItems();
+                initFab();
             }
             else
             {
@@ -98,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startRegisterIntent(){
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        Intent regIntent = new Intent(this, RegisterActivity.class);
+        startActivity(regIntent);
     }
 
     private void initFab()
@@ -144,8 +147,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void InitializeItems()
     {
-        RotationHandler.getInstance();
-        RotationHandler.setClass(RotationHandler.classOption.Main);
+//        RotationHandler.getInstance();
+//        RotationHandler.setClass(RotationHandler.classOption.Main);
 
         Button prikazButton = (Button) findViewById(R.id.prikazButton);
         prikazButton.setOnClickListener(this);
@@ -264,5 +267,17 @@ startLastNFragment();
         }
             startActivity(intent);
 
+    }
+
+    @Override
+    public void addData(long mileage, int fuel, float price, String totalOrPerLiter) {
+        Intent intent = new Intent(this, AddActivity.class);
+        if(mileage != 0 && fuel != 0 && price != 0 && !totalOrPerLiter.equals("")){
+            intent.putExtra("chosenMileage", mileage);
+            intent.putExtra("chosenFuel", fuel);
+            intent.putExtra("chosenPrice", price);
+            intent.putExtra("chosenTPL", totalOrPerLiter);
+        }
+        startActivity(intent);
     }
 }

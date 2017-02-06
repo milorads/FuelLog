@@ -71,9 +71,7 @@ public class RightActivity extends Fragment implements View.OnClickListener{
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
     }
 
     @Override
@@ -82,20 +80,42 @@ public class RightActivity extends Fragment implements View.OnClickListener{
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
     public void onDetach() {
+        long mlg =0;
+        int fuel =0;
+        float price = 0;
+        String tpl = "";
+        try {
+            EditText mi = (EditText) v.findViewById(R.id.editMileageText);
+            EditText pr = (EditText) v.findViewById(R.id.editPriceText);
+            EditText fl = (EditText) v.findViewById(R.id.editFuelText);
+            Spinner sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
+            mlg = Integer.parseInt(mi.getText().toString());
+            fuel = Integer.parseInt(fl.getText().toString());
+            price = Float.parseFloat(pr.getText().toString());
+            tpl = sp.getSelectedItem().toString();
+        }
+        catch (Exception e){
+
+        }
+        if(tpl != null){
+            mListener.addData(mlg, fuel, price, tpl);}
+        else{
+            mListener.addData(mlg, fuel, price, "");
+        }
         super.onDetach();
         mListener = null;
     }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void addData(long mileage, int fuel, float price, String totalOrPerLiter);
     }
 
     @Override
