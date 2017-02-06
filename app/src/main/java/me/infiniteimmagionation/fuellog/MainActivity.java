@@ -272,12 +272,10 @@ startLastNFragment();
     @Override
     public void addData(long mileage, int fuel, float price, String totalOrPerLiter) {
         Intent intent = new Intent(this, AddActivity.class);
-        if(mileage != 0 && fuel != 0 && price != 0 && !totalOrPerLiter.equals("")){
             intent.putExtra("chosenMileage", mileage);
             intent.putExtra("chosenFuel", fuel);
             intent.putExtra("chosenPrice", price);
             intent.putExtra("chosenTPL", totalOrPerLiter);
-        }
         startActivity(intent);
     }
 }

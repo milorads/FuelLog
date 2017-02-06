@@ -48,15 +48,15 @@ public class RightActivity extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
     }
 
-    View v;
+    View classView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_right, container, false);
+        classView = inflater.inflate(R.layout.fragment_right, container, false);
 
         Initialize();
 
-        return v;
+        return classView;
     }
 
     void Initialize(){
@@ -65,7 +65,7 @@ public class RightActivity extends Fragment implements View.OnClickListener{
 
 
         sharedpreferences = getActivity().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
-        Button saveDugme = (Button)v.findViewById(R.id.saveAddButton);
+        Button saveDugme = (Button)classView.findViewById(R.id.saveAddButton);
         saveDugme.setOnClickListener(this);
     }
 
@@ -92,10 +92,10 @@ public class RightActivity extends Fragment implements View.OnClickListener{
         float price = 0;
         String tpl = "";
         try {
-            EditText mi = (EditText) v.findViewById(R.id.editMileageText);
-            EditText pr = (EditText) v.findViewById(R.id.editPriceText);
-            EditText fl = (EditText) v.findViewById(R.id.editFuelText);
-            Spinner sp = (Spinner) v.findViewById(R.id.editTPLSpinner);
+            EditText mi = (EditText) classView.findViewById(R.id.mileageText);
+            EditText pr = (EditText) classView.findViewById(R.id.priceText);
+            EditText fl = (EditText) classView.findViewById(R.id.fuelText);
+            Spinner sp = (Spinner) classView.findViewById(R.id.perLiterTotal);
             mlg = Integer.parseInt(mi.getText().toString());
             fuel = Integer.parseInt(fl.getText().toString());
             price = Float.parseFloat(pr.getText().toString());
@@ -140,10 +140,10 @@ public class RightActivity extends Fragment implements View.OnClickListener{
             /**
              * CRUD Operations
              * */
-            EditText mi = (EditText)v.findViewById(R.id.mileageText);
-            EditText pr = (EditText)v.findViewById(R.id.priceText);
-            EditText fl = (EditText)v.findViewById(R.id.fuelText);
-            Spinner sp = (Spinner)v.findViewById(R.id.perLiterTotal);
+            EditText mi = (EditText)classView.findViewById(R.id.mileageText);
+            EditText pr = (EditText)classView.findViewById(R.id.priceText);
+            EditText fl = (EditText)classView.findViewById(R.id.fuelText);
+            Spinner sp = (Spinner)classView.findViewById(R.id.perLiterTotal);
             String tpl = sp.getSelectedItem().toString();
             try
             {
